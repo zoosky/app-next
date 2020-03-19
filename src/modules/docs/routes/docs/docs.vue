@@ -18,7 +18,7 @@ export default defineComponent({
 	main {
 		#docs-frame {
 			width: 100%;
-			height: 120%;
+			height: 100%;
 			overflow: hidden;
 		}
 	}
