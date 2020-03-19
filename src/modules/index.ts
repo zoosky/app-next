@@ -1,3 +1,4 @@
 import CollectionsModule from './collections/';
-export const modules = [CollectionsModule];
+import DocsModule from './docs/';
+export const modules = [CollectionsModule, DocsModule];
 export default modules;
