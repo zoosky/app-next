@@ -19,11 +19,7 @@ export default {
 
 export const vertical = () => ({
 	methods: {
-		onScroll: (eventType: ScrollType) => {
-			console.log(eventType.toString());
-
-			action('onScroll', { allowFunction: false });
-		}
+		onScroll: action('onScroll')
 	},
 	template: `
 		<div style="overflow-y: scroll; height: 100%; width: 50%" v-scroll="{callback: onScroll}">
@@ -34,11 +30,7 @@ export const vertical = () => ({
 
 export const horrizontal = () => ({
 	methods: {
-		onScroll: (eventType: ScrollType) => {
-			console.log(eventType);
-
-			action('onScroll', { allowFunction: false });
-		}
+		onScroll: action('onScroll')
 	},
 	template: `
 		<div style="overflow-x: scroll; height: 100%; width: 50%" v-scroll="{callback: onScroll}">
