@@ -29,7 +29,11 @@
 					<slot :name="scopedSlotName" v-bind="slotData" />
 				</template>
 			</header-bar>
-			<main ref="mainContent" @scroll="onMainScroll" :class="{ 'header-dense': headerDense }">
+			<main
+				ref="mainContent"
+				v-scroll="{ callback: onScroll }"
+				:class="{ 'header-dense': headerDense }"
+			>
 				<slot />
 			</main>
 		</div>
@@ -57,6 +61,7 @@ import DrawerDetailGroup from './components/drawer-detail-group/';
 import HeaderBar from './components/header-bar';
 import ProjectChooser from './components/project-chooser';
 import { throttle } from 'lodash';
+import { ScrollType } from '../../directives/scroll/scroll';
 
 export default defineComponent({
 	components: {
@@ -97,22 +102,16 @@ export default defineComponent({
 			}
 		});
 
-		const onMainScroll = throttle(event => {
-			const { scrollTop } = event.target;
-
-			if (scrollTop <= 5 && headerDenseAutoState.value === true) {
-				headerDenseAutoState.value = false;
-			} else if (scrollTop > 5 && headerDenseAutoState.value === false) {
-				headerDenseAutoState.value = true;
-			}
-		}, 50);
+		function onScroll(eventType: ScrollType) {
+			headerDenseAutoState.value = eventType != ScrollType.TOP_ENTER;
+		}
 
 		return {
 			navOpen,
 			drawerOpen,
 			_headerDense,
 			mainElement,
-			onMainScroll
+			onScroll
 		};
 	}
 });
