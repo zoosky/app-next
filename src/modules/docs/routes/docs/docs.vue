@@ -1,6 +1,6 @@
 <template>
 	<private-view title="Documentation" header-dense :header-dense-auto="true">
-		<iframe id="docs-frame" :src="url" frameBorder="0"></iframe>
+		<iframe id="docs-frame" :src="url" title="docs" frameBorder="0"></iframe>
 
 		<template #navigation>
 			<v-list nav>
