@@ -1,15 +1,15 @@
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Vue from 'vue';
-import InterfaceTextInput from './text-input.vue';
+import InterfaceCheckbox from './checkbox.vue';
 import markdown from './readme.md';
 import withPadding from '../../../.storybook/decorators/with-padding';
 import { defineComponent } from '@vue/composition-api';
 
-Vue.component('interface-text-input', InterfaceTextInput);
+Vue.component('interface-checkbox', InterfaceCheckbox);
 
 export default {
-	title: 'Interfaces / Text Input',
+	title: 'Interfaces / Checkbox',
 	decorators: [withKnobs, withPadding],
 	parameters: {
 		notes: markdown
@@ -19,17 +19,14 @@ export default {
 export const basic = () =>
 	defineComponent({
 		props: {
-			monospace: {
-				default: boolean('Monospace', false)
+			indeterminate: {
+				default: boolean('Indeterminate', false)
 			},
-			trim: {
-				default: boolean('Trim', false)
+			disabled: {
+				default: boolean('Disabled', false)
 			},
-			showCharacterCount: {
-				default: boolean('Show Character Count', false)
-			},
-			placeholder: {
-				default: text('Placeholder', 'Enter a value...')
+			label: {
+				default: text('Placeholder', '')
 			}
 		},
 		setup() {
@@ -37,11 +34,10 @@ export const basic = () =>
 			return { onInput };
 		},
 		template: `
-			<interface-text-input
-				:monospace="monospace"
-				:trim="trim"
-				:showCharacterCount="showCharacterCount"
-				:placeholder="placeholder"
+			<interface-checkbox
+                :label="label"
+                :disabled="disabled"
+                :indeterminate="indeterminate"
 				@input="onInput"
 			/>
 		`
