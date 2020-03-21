@@ -31,7 +31,7 @@ export default defineComponent({
 		}
 	},
 	setup(props, { emit }) {
-		const checked = ref(false);
+		const checked = ref(props.value);
 
 		function onChange(event: boolean) {
 			checked.value = event;
