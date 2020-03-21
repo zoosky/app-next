@@ -1,4 +1,4 @@
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Vue from 'vue';
 import InterfaceCheckbox from './checkbox.vue';
@@ -18,6 +18,11 @@ export default {
 
 export const basic = () =>
 	defineComponent({
+		data() {
+			return {
+				checked: false
+			};
+		},
 		props: {
 			indeterminate: {
 				default: boolean('Indeterminate', false)
@@ -34,7 +39,8 @@ export const basic = () =>
 			return { onInput };
 		},
 		template: `
-			<interface-checkbox
+            <interface-checkbox
+                v-model="checked"
                 :label="label"
                 :disabled="disabled"
                 :indeterminate="indeterminate"

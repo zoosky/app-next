@@ -1,7 +1,7 @@
 <template>
 	<v-checkbox
 		@change="onChange"
-		:inputValue="checked"
+		:inputValue="value"
 		:label="label"
 		:disabled="disabled"
 		:indeterminate="indeterminate"
@@ -31,14 +31,11 @@ export default defineComponent({
 		}
 	},
 	setup(props, { emit }) {
-		const checked = ref(props.value);
-
 		function onChange(event: boolean) {
-			checked.value = event;
 			emit('input', event);
 		}
 
-		return { onChange, checked };
+		return { onChange };
 	}
 });
 </script>
