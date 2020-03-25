@@ -123,7 +123,7 @@ export default defineComponent({
 | `selection`        | What items are selected. Can be used with `v-model` as well                                    | `() => []`          | `Array as PropType<Item[]>`      |
 | `fixed-header`     | Make the header fixed                                                                          | `false`             | `Boolean`                        |
 | `loading`          | Show progress indicator                                                                        | `false`             | `Boolean`                        |
-| `loading-text`     | What text to show when table is loading with no items                                          | `Loading...`        |                                  |
+| `loading-text`     | What text to show when table is loading with no items                                          | `i18n.t('loading')` | `String`                         |
 | `server-sort`      | Handle sorting on the parent level.                                                            | `false`             | `Boolean`                        |
 | `row-height`       | Height of the individual rows in px                                                            | `48`                | `Number`                         |
 
@@ -142,6 +142,7 @@ export default defineComponent({
 |----------------------------|----------------------------------|------|
 | `header.[value]`           | Override individual header cells |      |
 | `item.[value]`             | Override individual row cells    |      |
+| ``header.${header.value}`` |                                  |      |
 <!-- readme-gen-ignore: header.[value], item.[value] -->
 
 ## CSS Variables
