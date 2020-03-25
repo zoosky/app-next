@@ -13,18 +13,17 @@
 ```
 
 ## Props
-
-| Prop      | Description               | Default |
-|-----------|---------------------------|---------|
-| `size`    | Size in px                | --      |
-| `tile`    | Render as a tile (square) | `false` |
-| `x-small` | Render extra small        | `false` |
-| `small`   | Render small              | `false` |
-| `large`   | Render large              | `false` |
-| `x-large` | Render extra large        | `false` |
+| Prop      | Description               | Default | Type      |
+|-----------|---------------------------|---------|-----------|
+| `size`    | Size in px                | `null`  | `Number`  |
+| `tile`    | Render as a tile (square) | `false` | `Boolean` |
+| `x-small` | Render extra small        | `false` |           |
+| `small`   | Render small              | `false` |           |
+| `large`   | Render large              | `false` |           |
+| `x-large` | Render extra large        | `false` |           |
+<!-- readme-gen-igonre: x-small, small, large, x-large -->
 
 ## Slots
-
 | Slot      | Description | Data |
 |-----------|-------------|------|
 | _default_ |             | --   |
@@ -34,8 +33,7 @@
 n/a
 
 ## CSS Variables
-
-| Variable           | Default                     |
-|--------------------|-----------------------------|
-| `--v-avatar-color` | `--avatar-background-color` |
-| `--v-avatar-size`  | --                          |
+| Variable           | Default         |
+|--------------------|-----------------|
+| `--v-avatar-color` | `var(--action)` |
+| `--v-avatar-size`  | `48px`          |

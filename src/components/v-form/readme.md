@@ -13,19 +13,20 @@ Renders a form using interfaces based on the passed collection name.
 ```
 
 ## Props
-| Prop            | Description                                                                         | Default |
-|-----------------|-------------------------------------------------------------------------------------|---------|
-| `collection`    | The collection of which you want to render the fields                               | --      |
-| `initialValues` | Object of the starting values of the fields                                         | --      |
-| `edits`         | The edits that were made after the form was rendered. Supports the `.sync` modifier | --      |
+| Prop             | Description                                                                         | Default | Type                              |
+|------------------|-------------------------------------------------------------------------------------|---------|-----------------------------------|
+| `collection`*    | The collection of which you want to render the fields                               |         | `String`                          |
+| `edits`          | The edits that were made after the form was rendered. Supports the `.sync` modifier | `null`  | `Object as PropType<FieldValues>` |
+| `initial-values` | Object of the starting values of the fields                                         | `null`  | `Object as PropType<FieldValues>` |
 
 ## Slots
 n/a
 
 ## Events
-| Event          | Description                                                              |
-|----------------|--------------------------------------------------------------------------|
-| `update:edits` | Update the edits state. Enables the `.sync` modifier on the `edits` prop |
+| Event          | Description                                                              | Value |
+|----------------|--------------------------------------------------------------------------|-------|
+| `input`        |                                                                          |       |
+<!-- | `update:edits` | Update the edits state. Enables the `.sync` modifier on the `edits` prop |       | -->
 
 ## CSS Variables
 | Variable                  | Default                                |

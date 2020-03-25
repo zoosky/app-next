@@ -34,10 +34,10 @@ Cards can be used to consistently style dialogs:
 ```
 
 ## Props
-| Prop       | Description                                       | Default |
-|------------|---------------------------------------------------|---------|
-| `disabled` | Disable the card, prevents all cursor interaction | `false` |
-| `tile`     | Render without rounded corners                    | `false` |
+| Prop       | Description                                       | Default | Type      |
+|------------|---------------------------------------------------|---------|-----------|
+| `disabled` | Disable the card, prevents all cursor interaction | `false` | `Boolean` |
+| `tile`     | Render without rounded corners                    | `false` | `Boolean` |
 
 ## Events
 n/a

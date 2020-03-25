@@ -48,21 +48,22 @@ Just as with regular checkboxes, you can use `v-model` with both an array and a 
 Keep in mind to pass the `value` prop with a unique value when using arrays in `v-model`.
 
 ## Props
-| Prop         | Description                                                                                            | Default                           |
-|--------------|--------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `value`      | Value for switch. Similar to value attr on checkbox type input in HTML                                 | `--`                              |
-| `inputValue` | Value that's used with `v-model`. Either boolean or array of values                                    | `false`                           |
-| `label`      | Label for the checkbox                                                                                 | `--`                              |
+| Prop          | Description                                                            | Default | Type       |
+|---------------|------------------------------------------------------------------------|---------|------------|
+| `value`       | Value for switch. Similar to value attr on checkbox type input in HTML | `null`  | `String`   |
+| `input-value` | Value that's used with `v-model`. Either boolean or array of values    | `false` | `Boolean`  |
+| `label`       | Label for the checkbox                                                 | `null`  | `String`   |
+| `disabled`    |                                                                        | `false` | `Boolean`  |
 
 ## Events
-| Event    | Description                | Data                       |
-|----------|----------------------------|----------------------------|
-| `change` | New state for the checkbox | Boolean or array of values |
+| Event    | Description                | Data                       | Value |
+|----------|----------------------------|----------------------------|-------|
+| `change` | New state for the checkbox | Boolean or array of values |       |
 
 ## Slots
-| Slot    | Description                                                                                    |
-|---------|------------------------------------------------------------------------------------------------|
-| `label` | Allows custom markup and HTML to be rendered inside the label. Will override the `label` prop. |
+| Slot    | Description                                                                                    | Data |
+|---------|------------------------------------------------------------------------------------------------|------|
+| `label` | Allows custom markup and HTML to be rendered inside the label. Will override the `label` prop. |      |
 
 ## CSS Variables
 | Variable           | Default                         |

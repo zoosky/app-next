@@ -86,26 +86,26 @@ If you can't, you should listen to the `update:indeterminate` event and respond 
 ```
 
 ## Props
-| Prop            | Description                                                              | Default |
-|-----------------|--------------------------------------------------------------------------|---------|
-| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML | `--`    |
-| `inputValue`    | Value that's used with `v-model`. Either boolean or array of values      | `false` |
-| `label`         | Label for the checkbox                                                   | `--`    |
-| `disabled`      | Disable the checkbox                                                     | `false` |
-| `indeterminate` | Show the indeterminate state                                             | `false` |
+| Prop            | Description                                                              | Default | Type       |
+|-----------------|--------------------------------------------------------------------------|---------|------------|
+| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML | `null`  | `String`   |
+| `input-value`   | Value that's used with `v-model`. Either boolean or array of values      | `false` | `[Boolean` |
+| `label`         | Label for the checkbox                                                   | `null`  | `String`   |
+| `disabled`      | Disable the checkbox                                                     | `false` | `Boolean`  |
+| `indeterminate` | Show the indeterminate state                                             | `false` | `Boolean`  |
 
 ## Slots
-| Slot    | Description                                                                                    |
-|---------|------------------------------------------------------------------------------------------------|
-| `label` | Allows custom markup and HTML to be rendered inside the label. Will override the `label` prop. |
+| Slot    | Description                                                                                    | Data |
+|---------|------------------------------------------------------------------------------------------------|------|
+| `label` | Allows custom markup and HTML to be rendered inside the label. Will override the `label` prop. |      |
 
 ## Events
-| Event                  | Description                | Data                       |
-|------------------------|----------------------------|----------------------------|
-| `change`               | New state for the checkbox | Boolean or array of values |
-| `update:indeterminate` | New state for the checkbox | Boolean or array of values |
+| Event                  | Description                | Data                       | Value |
+|------------------------|----------------------------|----------------------------|-------|
+| `change`               | New state for the checkbox | Boolean or array of values |       |
+| `update:indeterminate` | New state for the checkbox | Boolean or array of values |       |
 
 ## CSS Variables
-| Variable             | Default                                |
-|----------------------|----------------------------------------|
-| `--v-checkbox-color` | `var(--input-background-color-active)` |
+| Variable             | Default                         |
+|----------------------|---------------------------------|
+| `--v-checkbox-color` | `var(--input-foreground-color)` |

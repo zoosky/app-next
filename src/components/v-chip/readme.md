@@ -44,18 +44,19 @@ There are two events, one when clicking on the chip called `click` and one when 
 ```
 
 ## Props
-| Prop        | Description                                          | Default |
-|-------------|------------------------------------------------------|---------|
-| `active`    | Change visibility. Can be reacted to via `sync`      | `true`  |
-| `close`     | Displays a close icon which triggers the close event | `false` |
-| `closeIcon` | Which icon should be displayed instead of `close   ` | `close` |
-| `outlined`  | No background                                        | `false` |
-| `label`     | Label style                                          | `false` |
-| `disabled`  | Disabled state                                       | `false` |
-| `x-small`   | Render extra small                                   | `false` |
-| `small`     | Render small                                         | `false` |
-| `large`     | Render large                                         | `false` |
-| `x-large`   | Render extra large                                   | `false` |
+| Prop         | Description                                          | Default   | Type      |
+|--------------|------------------------------------------------------|-----------|-----------|
+| `active`     | Change visibility. Can be reacted to via `sync`      | `null`    | `Boolean` |
+| `close`      | Displays a close icon which triggers the close event | `false`   | `Boolean` |
+| `close-icon` | Which icon should be displayed instead of `close `   | `'close'` | `String`  |
+| `outlined`   | No background                                        | `false`   | `Boolean` |
+| `label`      | Label style                                          | `false`   | `Boolean` |
+| `disabled`   | Disabled state                                       | `false`   | `Boolean` |
+| `x-small`    | Render extra small                                   | `false`   |           |
+| `small`      | Render small                                         | `false`   |           |
+| `large`      | Render large                                         | `false`   |           |
+| `x-large`    | Render extra large                                   | `false`   |           |
+<!-- readme-gen-igonre: x-small, small, large, x-large -->
 
 ## Slots
 | Slot      | Description | Data |
@@ -63,10 +64,11 @@ There are two events, one when clicking on the chip called `click` and one when 
 | _default_ |             | --   |
 
 ## Events
-| Event   | Description                                                                                    |
-|---------|------------------------------------------------------------------------------------------------|
-| `click` | Triggers when clicked somewhere on the chip                                                    |
-| `close` | Triggers when the `close` prop is enabled and gets clicked (Doesn't trigger the `click` event) |
+| Event           | Description                                                                                    | Value |
+|-----------------|------------------------------------------------------------------------------------------------|-------|
+| `click`         | Triggers when clicked somewhere on the chip                                                    |       |
+| `close`         | Triggers when the `close` prop is enabled and gets clicked (Doesn't trigger the `click` event) |       |
+| `update:active` |                                                                                                |       |
 
 ## CSS Variables
 | Variable                          | Default                               |

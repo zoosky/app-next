@@ -18,14 +18,14 @@ You can set the color, background color and boder color with the `--v-badge-colo
 ```
 
 ## Props
-| Prop                     | Description                                                                 | Default                            |
-|--------------------------|-----------------------------------------------------------------------------|------------------------------------|
-| `value`                  | The value that will be displayed inside the badge Only 2 characters allowed)| `null`                             |
-| `dot`                    | Only will show a small dot without any content                              | `false`                            |
-| `bordered`               | Shows a border arround the badge                                            | `false`                            |
-| `left`                   | Aligns the badge on the left side                                           | `false`                            |
-| `bottom`                 | Aligns the badge on the bottom side                                         | `false`                            |
-| `icon`                   | Shows an icon instead of text                                               | `null`                             |
+| Prop       | Description                                                                  | Default | Type      |
+|------------|------------------------------------------------------------------------------|---------|-----------|
+| `value`    | The value that will be displayed inside the badge Only 2 characters allowed) | `null`  | `String`  |
+| `dot`      | Only will show a small dot without any content                               | `false` | `Boolean` |
+| `bordered` | Shows a border arround the badge                                             | `false` | `Boolean` |
+| `left`     | Aligns the badge on the left side                                            | `false` | `Boolean` |
+| `bottom`   | Aligns the badge on the bottom side                                          | `false` | `Boolean` |
+| `icon`     | Shows an icon instead of text                                                | `null`  | `String`  |
 
 ## Slots
 N/A
@@ -34,10 +34,16 @@ N/A
 N/A
 
 ## CSS Variables
-| Variable                            | Default                                         |
-|-------------------------------------|-------------------------------------------------|
-| `--v-badge-color`                   | `var(--white)`                                  |
-| `--v-badge-background-color`        | `var(--danger)`                                 |
-| `--v-badge-border-color`            | `var(--background-color)`                       |
-| `--v-badge-offset-x`                | `0px`                                           |
-| `--v-badge-offset-y`                | `0px`                                           |
+| Variable                     | Default                   |
+|------------------------------|---------------------------|
+| `--v-badge-color`            | `var(--white)`            |
+| `--v-badge-background-color` | `var(--danger)`           |
+| `--v-badge-border-color`     | `var(--background-color)` |
+| `--v-badge-offset-x`         | `0px`                     |
+| `--v-badge-offset-y`         | `0px`                     |
+| `--v-badge-size`             | `20px`                    |
+
+## Slots
+| Slot      | Description | Data |
+|-----------|-------------|------|
+| _default_ |             |      |

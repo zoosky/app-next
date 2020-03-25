@@ -27,35 +27,31 @@ export default defineComponent({
 ```
 
 ## Props
-
-| Prop        | Description                                             | Default |
-|-------------|---------------------------------------------------------|---------|
-| `mandatory` | Require an item to be selected                          | `false` |
-| `max`       | Only allow a maximum of n items                         | `-1`    |
-| `multiple`  | Allow multiple items to be selected                     | `false` |
-| `value`     | The v-model value. Selection of indexes / custom values | --      |
-| `rounded`   | Adds rounded corners to the sides                       | `false` |
-| `tile`      | Adds sharp corners to the sides                         | `false` |
+| Prop        | Description                                             | Default     | Type                                     |
+|-------------|---------------------------------------------------------|-------------|------------------------------------------|
+| `mandatory` | Require an item to be selected                          | `false`     | `Boolean`                                |
+| `max`       | Only allow a maximum of n items                         | `-1`        | `Number`                                 |
+| `multiple`  | Allow multiple items to be selected                     | `false`     | `Boolean`                                |
+| `value`     | The v-model value. Selection of indexes / custom values | `undefined` | `Array as PropType<(string | number)[]>` |
+| `rounded`   | Adds rounded corners to the sides                       | `false`     | `Boolean`                                |
+| `tile`      | Adds sharp corners to the sides                         | `false`     | `Boolean`                                |
 
 
 ## Slots
-
 | Slot      | Description | Data |
 |-----------|-------------|------|
 | _default_ |             | --   |
 
 ## Events
-
-| Event   | Description                      | Data                  |
-|---------|----------------------------------|-----------------------|
-| `input` | Used to update the v-model value | `(string | number)[]` |
+| Event   | Description                      | Data                   | Value      |
+|---------|----------------------------------|------------------------|------------|
+| `input` | Used to update the v-model value | `(string or number)[]` |            |
 
 
 ## CSS Variables
-
-| Variable                                   | Default                                            |
-|--------------------------------------------|----------------------------------------------------|
-| `--v-button-group-background-color-active` | `var(--button-primary-background-color-disabled)`  |
+| Variable                                   | Default                                           |
+|--------------------------------------------|---------------------------------------------------|
+| `--v-button-group-background-color-active` | `var(--button-primary-background-color-disabled)` |
 
 
 

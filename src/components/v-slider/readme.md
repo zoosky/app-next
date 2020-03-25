@@ -51,31 +51,31 @@ You can add any custom content before and after the slider (inline). This can be
 ```
 
 ## Props
-| Prop               | Description                                                  | Default                     |
-|--------------------|--------------------------------------------------------------|-----------------------------|
-| `max`              | Maximum allowed value                                        | `100`                       |
-| `min`              | Minimum allowed value                                        | `0`                         |
-| `show-thumb-label` | Show the thumb label on drag of the thumb                    | `false`                     |
-| `show-ticks`       | Show tick for each step                                      | `false`                     |
-| `step`             | In what step the value can be entered                        | `1`                         |
-| `value`            | Current value of slider. Can be used with `v-model`          | `50`                        |
+| Prop               | Description                                         | Default | Type      |
+|--------------------|-----------------------------------------------------|---------|-----------|
+| `max`              | Maximum allowed value                               | `100`   | `Number`  |
+| `min`              | Minimum allowed value                               | `0`     | `Number`  |
+| `show-thumb-label` | Show the thumb label on drag of the thumb           | `false` | `Boolean` |
+| `show-ticks`       | Show tick for each step                             | `false` | `Boolean` |
+| `step`             | In what step the value can be entered               | `1`     | `Number`  |
+| `value`            | Current value of slider. Can be used with `v-model` | `50`    | `Number`  |
 
 ## Events
-| Event           | Description                                 | Value    |
-|-----------------|---------------------------------------------|----------|
-| `change`        | Fires only when the user releases the thumb | `number` |
-| `input`         | Fires continuously                          | `number` |
+| Event    | Description                                 | Value    |
+|----------|---------------------------------------------|----------|
+| `change` | Fires only when the user releases the thumb | `number` |
+| `input`  | Fires continuously                          | `number` |
 
 ## Slots
-| Slot          | Description                        | Props               |
-|---------------|------------------------------------|---------------------|
-| `append`      | Inserted after the slider track    | --                  |
-| `prepend`     | Inserted before the slider track   | --                  |
-| `thumb-label` | Custom content for the thumb label | `{ value: number }` |
+| Slot          | Description                        | Props               | Data |
+|---------------|------------------------------------|---------------------|------|
+| `append`      | Inserted after the slider track    | --                  |      |
+| `prepend`     | Inserted before the slider track   | --                  |      |
+| `thumb-label` | Custom content for the thumb label | `{ value: number }` |      |
 
 ## CSS Variables
-| Variable                 | Default                          |
-|--------------------------|----------------------------------|
-| `--v-slider-color`       | `var(--slider-track-color)`      |
-| `--v-slider-fill-color`  | `var(--slider-track-fill-color)` |
-| `--v-slider-thumb-color` | `var(--slider-thumb-color)`      |
+| Variable                 | Default                         |
+|--------------------------|---------------------------------|
+| `--v-slider-color`       | `var(--input-border-color)`     |
+| `--v-slider-fill-color`  | `var(--input-foreground-color)` |
+| `--v-slider-thumb-color` | `var(--input-foreground-color)` |

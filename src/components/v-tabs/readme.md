@@ -33,16 +33,16 @@ export default defineComponent({
 ```
 
 ## Props
-| Prop       | Description                        | Default |
-|------------|------------------------------------|---------|
-| `vertical` | Render the tabs vertically         | `false` |
-| `value`    | v-model value for active selection | --      |
+| Prop       | Description                        | Default     | Type                                     |
+|------------|------------------------------------|-------------|------------------------------------------|
+| `vertical` | Render the tabs vertically         | `false`     | `Boolean`                                |
+| `value`    | v-model value for active selection | `undefined` | `Array as PropType<(string | number)[]>` |
 
 
 ## Events
-| Event   | Description              | Value                          |
-|---------|--------------------------|--------------------------------|
-| `input` | Update current selection | `readonly (string | number)[]` |
+| Event   | Description              | Value             |
+|---------|--------------------------|-------------------|
+| `input` | Update current selection | `readonly (string or number)[]`|
 
 ## Slots
 | Slot      | Description | Data |

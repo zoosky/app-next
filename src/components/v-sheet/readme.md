@@ -27,21 +27,21 @@ The color can be changed via the css variable called `--v-sheet-color`.
 n/a
 
 ## Slots
-| Slot      | Description | Data  |
-|-----------|-------------|-------|
-| _default_ |             | --    |
+| Slot      | Description | Data |
+|-----------|-------------|------|
+| _default_ |             | --   |
 
 ## Events
 n/a
 
 ## CSS Variables
-| Variable                     | Default                             |
-|------------------------------|-------------------------------------|
-| `--v-sheet-background-color` | `var(--input-background-color-alt)` |
-| `--v-sheet-height`           | `auto`                              |
-| `--v-sheet-min-height`       | `var(--input-height)`               |
-| `--v-sheet-max-height`       | `none`                              |
-| `--v-sheet-width`            | `auto`                              |
-| `--v-sheet-min-width`        | `none`                              |
-| `--v-sheet-max-width`        | `none`                              |
-| `--v-sheet-padding`          | `8px`                               |
+| Variable                     | Default               |
+|------------------------------|-----------------------|
+| `--v-sheet-background-color` | `var(--highlight)`    |
+| `--v-sheet-height`           | `auto`                |
+| `--v-sheet-min-height`       | `var(--input-height)` |
+| `--v-sheet-max-height`       | `none`                |
+| `--v-sheet-width`            | `auto`                |
+| `--v-sheet-min-width`        | `none`                |
+| `--v-sheet-max-width`        | `none`                |
+| `--v-sheet-padding`          | `8px`                 |

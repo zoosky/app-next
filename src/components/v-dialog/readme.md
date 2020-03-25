@@ -15,17 +15,19 @@ Renders an overlay with a flex slot rendering whatever content you pass
 ```
 
 ## Props
-| Prop         | Description                     | Default |
-|--------------|---------------------------------|---------|
-| `persistent` | Disable clicking on the overlay | --      |
+| Prop         | Description                     | Default | Type      |
+|--------------|---------------------------------|---------|-----------|
+| `persistent` | Disable clicking on the overlay | `false` | `Boolean` |
+| `active`     |                                 | `false` | `Boolean` |
 
 ## Slots
-| Slot      | Description | Data |
-|-----------|-------------|------|
-| _default_ |             | --   |
+| Slot        | Description | Data |
+|-------------|-------------|------|
+| _default_   |             | --   |
+| `activator` |             |      |
 
 ## Events
-| Events   | Description             | Value     |
+| Event   | Description             | Value      |
 |----------|-------------------------|-----------|
 | `toggle` | Change the active state | `boolean` |
 

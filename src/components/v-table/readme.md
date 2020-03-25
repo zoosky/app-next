@@ -111,21 +111,21 @@ export default defineComponent({
 ```
 
 ## Props
-| Prop               | Description                                                                                    | Default      |
-|--------------------|------------------------------------------------------------------------------------------------|--------------|
-| `headers`*         | What columns to show in the table. Supports the `.sync` modifier                               | --           |
-| `items`*           | The individual items to render as rows                                                         | --           |
-| `item-key`         | Primary key of the item. Used for keys / selections                                            | `id`         |
-| `sort`             | What column / order to sort by. Supports the `.sync` modifier. `{ by: string, desc: boolean }` | --           |
-| `show-select`      | Show checkboxes                                                                                | `false`      |
-| `show-resize`      | Show resize handlers                                                                           | `false`      |
-| `show-manual-sort` | Show manual sort drag handles                                                                  | `false`      |
-| `selection`        | What items are selected. Can be used with `v-model` as well                                    | `[]`         |
-| `fixed-header`     | Make the header fixed                                                                          | `false`      |
-| `loading`          | Show progress indicator                                                                        | `false`      |
-| `loadingText`      | What text to show when table is loading with no items                                          | `Loading...` |
-| `server-sort`      | Handle sorting on the parent level.                                                            | `false`      |
-| `row-height`       | Height of the individual rows in px                                                            | `48`         |
+| Prop               | Description                                                                                    | Default             | Type                             |
+|--------------------|------------------------------------------------------------------------------------------------|---------------------|----------------------------------|
+| `headers`*         | What columns to show in the table. Supports the `.sync` modifier                               | --                  | `Array as PropType<HeaderRaw[]>` |
+| `items`*           | The individual items to render as rows                                                         | --                  | `Array as PropType<Item[]>`      |
+| `item-key`         | Primary key of the item. Used for keys / selections                                            | `'id'`              | `String`                         |
+| `sort`             | What column / order to sort by. Supports the `.sync` modifier. `{ by: string, desc: boolean }` | `null`              | `Object as PropType<Sort>`       |
+| `show-select`      | Show checkboxes                                                                                | `false`             | `Boolean`                        |
+| `show-resize`      | Show resize handlers                                                                           | `false`             | `Boolean`                        |
+| `show-manual-sort` | Show manual sort drag handles                                                                  | `false`             | `Boolean`                        |
+| `selection`        | What items are selected. Can be used with `v-model` as well                                    | `() => []`          | `Array as PropType<Item[]>`      |
+| `fixed-header`     | Make the header fixed                                                                          | `false`             | `Boolean`                        |
+| `loading`          | Show progress indicator                                                                        | `false`             | `Boolean`                        |
+| `loading-text`     | What text to show when table is loading with no items                                          | `Loading...`        |                                  |
+| `server-sort`      | Handle sorting on the parent level.                                                            | `false`             | `Boolean`                        |
+| `row-height`       | Height of the individual rows in px                                                            | `48`                | `Number`                         |
 
 ## Events
 | Event            | Description                                    | Value                           |
@@ -134,14 +134,18 @@ export default defineComponent({
 | `update:headers` | `.sync` event for `headers` prop               | `HeaderRaw[]`                   |
 | `item-selected`  | Emitted when an item is selected or deselected | `{ item: any, value: boolean }` |
 | `select`         | Emitted when selected items change             | `any[]`                         |
+| `update:items`   |                                                |                                 |
+| `drop`           |                                                |                                 |
 
 ## Slots
-| Slot             | Description                      |
-|------------------|----------------------------------|
-| `header.[value]` | Override individual header cells |
-| `item.[value]`   | Override individual row cells    |
+| Slot                       | Description                      | Data |
+|----------------------------|----------------------------------|------|
+| `header.[value]`           | Override individual header cells |      |
+| `item.[value]`             | Override individual row cells    |      |
+<!-- readme-gen-ignore: header.[value], item.[value] -->
 
 ## CSS Variables
-| Variable           | Default |
-|--------------------|---------|
-| `--v-table-height` | `auto`  |
+| Variable                      | Default |
+|-------------------------------|---------|
+| `--v-table-height`            | `auto`  |
+| `--v-table-sticky-offset-top` | `0`     |

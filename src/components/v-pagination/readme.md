@@ -7,13 +7,13 @@
 ```
 
 ## Props
-| Prop              | Description                                      | Default |
-|-------------------|--------------------------------------------------|---------|
-| `disabled`        | Disables the pagination                          | `false` |
-| `length`*         | Length of the pagination component               |         |
-| `total-visible`   | Specify the max total visible pagination numbers |         |
-| `value`           | Currently selected page                          |         |
-| `show-first-last` | Show first/last buttons                          | `false` |
+| Prop              | Description                                      | Default     | Type      |
+|-------------------|--------------------------------------------------|-------------|-----------|
+| `disabled`        | Disables the pagination                          | `false`     | `Boolean` |
+| `length`*         | Length of the pagination component               | `null`      | `Number`  |
+| `total-visible`   | Specify the max total visible pagination numbers | `undefined` | `Number`  |
+| `value`           | Currently selected page                          | `null`      | `Number`  |
+| `show-first-last` | Show first/last buttons                          | `false`     | `Boolean` |
 
 ## Events
 | Event   | Description           | Value    |

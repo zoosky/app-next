@@ -24,10 +24,10 @@ The colors can be changed via the css variable `--v-overlay-color`.
 ```
 
 ## Props
-| Prop       | Description               | Default               |
-|------------|---------------------------|-----------------------|
-| `active`   | Show / hide the overlay   | `false`               |
-| `absolute` | Add `position: absolute;` | `false`               |
+| Prop       | Description               | Default | Type      |
+|------------|---------------------------|---------|-----------|
+| `active`   | Show / hide the overlay   | `false` | `Boolean` |
+| `absolute` | Add `position: absolute;` | `false` | `Boolean` |
 
 ## Slots
 | Slot      | Description | Data |
@@ -40,7 +40,7 @@ The colors can be changed via the css variable `--v-overlay-color`.
 | `click` |             | `MouseEvent` |
 
 ## CSS Variables
-| Variable              | Default                    |
-|-----------------------|----------------------------|
-| `--v-overlay-color`   | `var(--overlay-color)`     |
-| `--v-overlay-z-index` | `500`                      |
+| Variable              | Default                |
+|-----------------------|------------------------|
+| `--v-overlay-color`   | `var(--overlay-color)` |
+| `--v-overlay-z-index` | `500`                  |

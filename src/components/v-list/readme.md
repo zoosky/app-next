@@ -11,12 +11,12 @@
 ```
 
 ## Props
-| Prop        | Description                                                                                                 | Default |
-|-------------|-------------------------------------------------------------------------------------------------------------|---------|
-| `dense`     | Removes some padding to make the list items closer together                                                 | `false` |
-| `threeLine` | Limits list items to three lines of text (1 of title, 2 of subtitle). Only works in webkit enabled browsers | `false` |
-| `nav`       | Adds a small margin and border-radius for nav menu styling                                                  | `false` |
-| `multiple`  | Allows multiple child groups to be open at once                                                             | `true`  |
+| Prop        | Description                                                                                                 | Default | Type                            |
+|-------------|-------------------------------------------------------------------------------------------------------------|---------|---------------------------------|
+| `dense`     | Removes some padding to make the list items closer together                                                 | `false` | `Boolean`                       |
+| `nav`       | Adds a small margin and border-radius for nav menu styling                                                  | `false` | `Boolean`                       |
+| `multiple`  | Allows multiple child groups to be open at once                                                             | `true`  | `Boolean`                       |
+| `lines`     | Limits list items to three lines of text (1 of title, 2 of subtitle). Only works in webkit enabled browsers | `null`  | `Number as PropType<1 | 2 | 3>` |
 
 ## Events
 n/a
