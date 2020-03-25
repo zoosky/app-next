@@ -175,3 +175,21 @@ n/a
 
 ### Item (`v-item`)
 n/a
+
+## Events
+| Event   | Description | Value |
+|---------|-------------|-------|
+| `input` |             |       |
+
+## Props
+| Prop        | Description | Default     | Type                                      |
+|-------------|-------------|-------------|-------------------------------------------|
+| `mandatory` |             | `false`     | `Boolean`                                 |
+| `max`       |             | `-1`        | `Number`                                  |
+| `multiple`  |             | `false`     | `Boolean`                                 |
+| `value`     |             | `undefined` | `Array as PropType<(string or number)[]>` |
+
+## Slots
+| Slot      | Description | Data |
+|-----------|-------------|------|
+| _default_ |             |      |

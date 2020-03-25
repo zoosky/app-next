@@ -46,23 +46,23 @@ The button has a loading state that can be enabled with the `loading` prop. By d
 The loading slot is rendered _on top_ of the content that was there before. Make sure that your loading content doesn't exceed the size of the default state content. This restriction is put in place to prevent jumps when going from and to the loading state.
 
 ## Props
-| Prop         | Description                                                               | Default    | Type      |
-|--------------|---------------------------------------------------------------------------|------------|-----------|
-| `icon`       | Remove padding / min-width. Meant to be used with just an icon as content | `false`    | `Boolean` |
-| `outlined`   | No background                                                             | `false`    | `Boolean` |
-| `rounded`    | Enable rounded corners                                                    | `false`    | `Boolean` |
-| `type`       | HTML `type` attribute                                                     | `'button'` | `String`  |
-| `disabled`   | Disabled state                                                            | `false`    | `Boolean` |
-| `loading`    | Loading state                                                             | `false`    | `Boolean` |
-| `x-small`    | Render extra small                                                        | `false`    |           |
-| `small`      | Render small                                                              | `false`    |           |
-| `large`      | Render large                                                              | `false`    |           |
-| `x-large`    | Render extra large                                                        | `false`    |           |
-| `to`         | Render as vue router-link                                                 | `null`     | `[String` |
-| `full-width` |                                                                           | `false`    | `Boolean` |
-| `exact`      |                                                                           | `false`    | `Boolean` |
-| `secondary`  |                                                                           | `false`    | `Boolean` |
-| `value`      |                                                                           | `null`     | `[Number` |
+| Prop         | Description                                                               | Default    | Type                                               |
+|--------------|---------------------------------------------------------------------------|------------|----------------------------------------------------|
+| `icon`       | Remove padding / min-width. Meant to be used with just an icon as content | `false`    | `Boolean`                                          |
+| `outlined`   | No background                                                             | `false`    | `Boolean`                                          |
+| `rounded`    | Enable rounded corners                                                    | `false`    | `Boolean`                                          |
+| `type`       | HTML `type` attribute                                                     | `'button'` | `String`                                           |
+| `disabled`   | Disabled state                                                            | `false`    | `Boolean`                                          |
+| `loading`    | Loading state                                                             | `false`    | `Boolean`                                          |
+| `x-small`    | Render extra small                                                        | `false`    |                                                    |
+| `small`      | Render small                                                              | `false`    |                                                    |
+| `large`      | Render large                                                              | `false`    |                                                    |
+| `x-large`    | Render extra large                                                        | `false`    |                                                    |
+| `to`         | Render as vue router-link                                                 | `null`     | `[String, Object] as PropType<string or Location>` |
+| `full-width` |                                                                           | `false`    | `Boolean`                                          |
+| `exact`      |                                                                           | `false`    | `Boolean`                                          |
+| `secondary`  |                                                                           | `false`    | `Boolean`                                          |
+| `value`      |                                                                           | `null`     | `[Number, String]`                                 |
 <!-- readme-gen-igonre: x-small, small, large, x-large -->
 
 ## Slots

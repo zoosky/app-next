@@ -27,7 +27,7 @@ Renders an overlay with a flex slot rendering whatever content you pass
 | `activator` |             |      |
 
 ## Events
-| Event   | Description             | Value      |
+| Event    | Description             | Value     |
 |----------|-------------------------|-----------|
 | `toggle` | Change the active state | `boolean` |
 

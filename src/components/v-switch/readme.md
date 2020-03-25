@@ -48,12 +48,12 @@ Just as with regular checkboxes, you can use `v-model` with both an array and a 
 Keep in mind to pass the `value` prop with a unique value when using arrays in `v-model`.
 
 ## Props
-| Prop          | Description                                                            | Default | Type       |
-|---------------|------------------------------------------------------------------------|---------|------------|
-| `value`       | Value for switch. Similar to value attr on checkbox type input in HTML | `null`  | `String`   |
-| `input-value` | Value that's used with `v-model`. Either boolean or array of values    | `false` | `Boolean`  |
-| `label`       | Label for the checkbox                                                 | `null`  | `String`   |
-| `disabled`    |                                                                        | `false` | `Boolean`  |
+| Prop          | Description                                                            | Default | Type               |
+|---------------|------------------------------------------------------------------------|---------|--------------------|
+| `value`       | Value for switch. Similar to value attr on checkbox type input in HTML | `null`  | `String`           |
+| `input-value` | Value that's used with `v-model`. Either boolean or array of values    | `false` | `[Boolean, Array]` |
+| `label`       | Label for the checkbox                                                 | `null`  | `String`           |
+| `disabled`    |                                                                        | `false` | `Boolean`          |
 
 ## Events
 | Event    | Description                | Data                       | Value |

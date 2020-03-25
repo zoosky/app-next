@@ -5,12 +5,12 @@
 ```
 
 ## Props
-| Prop      | Description                                                        | Default | Type      |
-|-----------|--------------------------------------------------------------------|---------|-----------|
-| `success` | Shows the success notice                                           | `false` | `Boolean` |
-| `warning` | Shows the warning notice                                           | `false` | `Boolean` |
-| `danger`  | Shows the danger notice                                            | `false` | `Boolean` |
-| `icon`    | Custom icon name, or false if you want to hide the icon completely | `null`  | `[String` |
+| Prop      | Description                                                        | Default | Type                |
+|-----------|--------------------------------------------------------------------|---------|---------------------|
+| `success` | Shows the success notice                                           | `false` | `Boolean`           |
+| `warning` | Shows the warning notice                                           | `false` | `Boolean`           |
+| `danger`  | Shows the danger notice                                            | `false` | `Boolean`           |
+| `icon`    | Custom icon name, or false if you want to hide the icon completely | `null`  | `[String, Boolean]` |
 
 ## Slots
 | Slot      | Description | Data |

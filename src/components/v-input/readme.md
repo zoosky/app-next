@@ -13,15 +13,15 @@ The HTML `<input>` element supports a huge amount of attributes and events. In o
 You can add any custom (text) prefix/suffix to the value in the input using the `prefix` and `suffix` slots.
 
 ## Props
-| Prop         | Description                                    | Default | Type      |
-|--------------|------------------------------------------------|---------|-----------|
-| `autofocus`  | Autofocusses the input on render               | `false` | `Boolean` |
-| `disabled`   | Set the disabled state for the input           | `false` | `Boolean` |
-| `monospace`  | Render the entered value in the monospace font | `false` | `Boolean` |
-| `full-width` | Render the input with 100% width               | `false` | `Boolean` |
-| `prefix`     | Prefix the users value with a value            | `null`  | `String`  |
-| `suffix`     | Show a value at the end of the input           | `null`  | `String`  |
-| `value`      |                                                | `null`  | `[String` |
+| Prop         | Description                                    | Default | Type               |
+|--------------|------------------------------------------------|---------|--------------------|
+| `autofocus`  | Autofocusses the input on render               | `false` | `Boolean`          |
+| `disabled`   | Set the disabled state for the input           | `false` | `Boolean`          |
+| `monospace`  | Render the entered value in the monospace font | `false` | `Boolean`          |
+| `full-width` | Render the input with 100% width               | `false` | `Boolean`          |
+| `prefix`     | Prefix the users value with a value            | `null`  | `String`           |
+| `suffix`     | Show a value at the end of the input           | `null`  | `String`           |
+| `value`      |                                                | `null`  | `[String, Number]` |
 
 Note: all other attached attributes are bound to the input HTMLELement in the component. This allows you to attach any of the standard HTML attributes like `min`, `length`, or `pattern`.
 

@@ -23,9 +23,9 @@ Renders a form using interfaces based on the passed collection name.
 n/a
 
 ## Events
-| Event          | Description                                                              | Value |
-|----------------|--------------------------------------------------------------------------|-------|
-| `input`        |                                                                          |       |
+| Event   | Description | Value |
+|---------|-------------|-------|
+| `input` |             |       |
 <!-- | `update:edits` | Update the edits state. Enables the `.sync` modifier on the `edits` prop |       | -->
 
 ## CSS Variables

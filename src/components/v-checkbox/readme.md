@@ -86,13 +86,13 @@ If you can't, you should listen to the `update:indeterminate` event and respond 
 ```
 
 ## Props
-| Prop            | Description                                                              | Default | Type       |
-|-----------------|--------------------------------------------------------------------------|---------|------------|
-| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML | `null`  | `String`   |
-| `input-value`   | Value that's used with `v-model`. Either boolean or array of values      | `false` | `[Boolean` |
-| `label`         | Label for the checkbox                                                   | `null`  | `String`   |
-| `disabled`      | Disable the checkbox                                                     | `false` | `Boolean`  |
-| `indeterminate` | Show the indeterminate state                                             | `false` | `Boolean`  |
+| Prop            | Description                                                              | Default | Type               |
+|-----------------|--------------------------------------------------------------------------|---------|--------------------|
+| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML | `null`  | `String`           |
+| `input-value`   | Value that's used with `v-model`. Either boolean or array of values      | `false` | `[Boolean, Array]` |
+| `label`         | Label for the checkbox                                                   | `null`  | `String`           |
+| `disabled`      | Disable the checkbox                                                     | `false` | `Boolean`          |
+| `indeterminate` | Show the indeterminate state                                             | `false` | `Boolean`          |
 
 ## Slots
 | Slot    | Description                                                                                    | Data |
