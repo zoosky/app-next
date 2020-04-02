@@ -38,7 +38,7 @@ export const basic = () =>
 		},
 		template: `
 			<interface-text-input
-				:options="{ monospace, trim, showCharacterCount, placeholder }"
+				v-bind="{ monospace, trim, showCharacterCount, placeholder }"
 				@input="onInput"
 			/>
 		`,
