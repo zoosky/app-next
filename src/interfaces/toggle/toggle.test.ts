@@ -2,24 +2,21 @@ import VueCompositionAPI from '@vue/composition-api';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import InterfaceToggle from './switch.vue';
 
-import VSwitch from '@/components/v-switch';
+import VCheckbox from '@/components/v-checkbox';
 
 const localVue = createLocalVue();
 localVue.use(VueCompositionAPI);
-localVue.component('v-switch', VSwitch);
+localVue.component('v-switch', VCheckbox);
 
-describe('Interfaces / Switch', () => {
-	it('Renders a switch', () => {
+describe('Interfaces / Toggle', () => {
+	it('Renders a checkbox', () => {
 		const component = shallowMount(InterfaceToggle, {
 			localVue,
-			propsData: {
-				checkbox: false,
-				readonly: false,
-			},
+			propsData: {},
 			listeners: {
 				change: () => {},
 			},
 		});
-		expect(component.find(VSwitch).exists()).toBe(true);
+		expect(component.find(VCheckbox).exists()).toBe(true);
 	});
 });

@@ -3,7 +3,11 @@
 		<v-checkbox
 			v-model="inputValue"
 			:label="label"
-			:style="color ? { '--v-checkbox-color': color } : null"
+			:style="[
+				colorOn ? { '--v-checkbox-color': `var(--${colorOn}, ${colorOn})` } : null,
+				colorOff ? { '--v-checkbox-color-off': `var(--${colorOff}, ${colorOff})` } : null,
+			]"
+			v-bind="{ iconOn, iconOff }"
 		/>
 	</div>
 </template>
@@ -57,10 +61,8 @@ export default defineComponent({
 		const label = computed<string>(() => {
 			return props.inputValue === true ? props.labelOn : props.labelOff;
 		});
-		const color = computed<string>(() => {
-			return props.inputValue === true ? props.colorOn : props.colorOff;
-		});
-		return { icon, label, color };
+
+		return { icon, label };
 	},
 });
 </script>
