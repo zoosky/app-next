@@ -14,7 +14,6 @@ describe('Interfaces / Text Input', () => {
 			localVue,
 			propsData: {
 				options: {
-					monospace: false,
 					placeholder: 'Enter value...',
 				},
 			},

@@ -1,4 +1,4 @@
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, optionsKnob, text } from '@storybook/addon-knobs';
 import Vue from 'vue';
 import readme from './readme.md';
 import withPadding from '../../../.storybook/decorators/with-padding';
@@ -22,8 +22,19 @@ export const basic = () =>
 			disabled: {
 				default: boolean('Disabled', false),
 			},
-			monospace: {
-				default: boolean('Monospace', false),
+			trim: {
+				default: boolean('Trim', false),
+			},
+			placeholder: {
+				default: text('Placeholder', 'Enter a longer value.....'),
+			},
+			font: {
+				default: optionsKnob(
+					'Font',
+					{ Sans: 'sans-serif', Serif: 'serif', Mono: 'monospace' },
+					'sans',
+					{ display: 'select' }
+				),
 			},
 			fullWidth: {
 				default: boolean('Full Width', false),
@@ -44,9 +55,8 @@ export const basic = () =>
 					v-model="value"
 					:disabled="disabled"
 					:full-width="fullWidth"
-					:monospace="monospace"
+					v-bind="{placeholder, font, trim}"
 					:expand-on-focus="expandOnFocus"
-					placeholder="Enter a value..."
 				/>
 				<raw-value>{{ value }}</raw-value>
 			</div>

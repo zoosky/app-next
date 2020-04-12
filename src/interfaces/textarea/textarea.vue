@@ -1,15 +1,15 @@
 <template>
 	<v-textarea
-		v-model="value"
-		:placeholder="placeholder"
-		:monospace="monospace"
-		:rows="rows"
+		v-bind="{ placeholder, trim, font }"
+		:value="value"
+		:disabled="readonly"
+		@input="$listeners.input"
 		full-width
 	/>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 
 export default defineComponent({
 	props: {
@@ -17,7 +17,7 @@ export default defineComponent({
 			type: String,
 			default: null,
 		},
-		disabled: {
+		readonly: {
 			type: Boolean,
 			default: false,
 		},
@@ -25,9 +25,13 @@ export default defineComponent({
 			type: String,
 			default: null,
 		},
-		monospace: {
+		trim: {
 			type: Boolean,
-			default: false,
+			default: true,
+		},
+		font: {
+			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
+			default: 'sans-serif',
 		},
 	},
 });

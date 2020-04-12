@@ -8,21 +8,22 @@
 			'has-content': hasContent,
 		}"
 	>
+		<div class="prepend" v-if="$scopedSlots.prepend"><slot name="prepend" /></div>
 		<textarea
 			v-bind="$attrs"
 			v-focus="autofocus"
 			v-on="_listeners"
-			:class="{ monospace }"
+			:placeholder="placeholder"
+			:class="[font]"
 			:disabled="disabled"
 			:value="value"
 		/>
-		<div class="prepend" v-if="$scopedSlots.prepend"><slot name="prepend" /></div>
 		<div class="append" v-if="$scopedSlots.append"><slot name="append" /></div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
+import { defineComponent, computed, PropType } from '@vue/composition-api';
 
 export default defineComponent({
 	props: {
@@ -31,10 +32,6 @@ export default defineComponent({
 			default: false,
 		},
 		autofocus: {
-			type: Boolean,
-			default: false,
-		},
-		monospace: {
 			type: Boolean,
 			default: false,
 		},
@@ -50,6 +47,18 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
+		placeholder: {
+			type: String,
+			default: null,
+		},
+		trim: {
+			type: Boolean,
+			default: true,
+		},
+		font: {
+			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
+			default: 'sans-serif',
+		},
 	},
 	setup(props, { emit, listeners }) {
 		const _listeners = computed(() => ({
@@ -62,7 +71,11 @@ export default defineComponent({
 		return { _listeners, hasContent };
 
 		function emitValue(event: InputEvent) {
-			emit('input', (event.target as HTMLInputElement).value);
+			let value = (event.target as HTMLInputElement).value;
+			if (props.trim === true) {
+				value = value.trim();
+			}
+			emit('input', value);
 		}
 	},
 });
@@ -151,6 +164,12 @@ export default defineComponent({
 
 		&.monospace {
 			font-family: var(--family-monospace);
+		}
+		&.sans-serif {
+			font-family: var(--family-sans-serif);
+		}
+		&.serif {
+			font-family: var(--family-serif);
 		}
 	}
 }
