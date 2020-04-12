@@ -3,7 +3,7 @@
 		<div v-if="$slots['prepend-outer']" class="prepend-outer">
 			<slot name="prepend-outer" :value="value" :disabled="disabled" />
 		</div>
-		<div class="input" :class="{ disabled, monospace }">
+		<div class="input" :class="[font, { disabled }]">
 			<div v-if="$slots.prepend" class="prepend">
 				<slot name="prepend" :value="value" :disabled="disabled" />
 			</div>
@@ -12,6 +12,7 @@
 				v-bind="$attrs"
 				v-focus="autofocus"
 				v-on="_listeners"
+				:type="masked ? 'password' : 'text'"
 				:disabled="disabled"
 				:value="value"
 			/>
@@ -27,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
+import { defineComponent, computed, PropType } from '@vue/composition-api';
 import slugify from '@sindresorhus/slugify';
 
 export default defineComponent({
@@ -49,9 +50,9 @@ export default defineComponent({
 			type: String,
 			default: null,
 		},
-		monospace: {
-			type: Boolean,
-			default: false,
+		font: {
+			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
+			default: 'sans-serif',
 		},
 		fullWidth: {
 			type: Boolean,
@@ -69,6 +70,14 @@ export default defineComponent({
 			type: String,
 			default: '-',
 		},
+		trim: {
+			type: Boolean,
+			default: true,
+		},
+		masked: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	setup(props, { emit, listeners }) {
 		const _listeners = computed(() => ({
@@ -83,6 +92,8 @@ export default defineComponent({
 
 			if (props.slug === true) {
 				value = slugify(value, { separator: props.slugSeparator });
+			} else if (props.trim === true) {
+				value = value.trim();
 			}
 
 			emit('input', value);
@@ -151,6 +162,18 @@ export default defineComponent({
 		&.monospace {
 			input {
 				font-family: var(--family-monospace);
+			}
+		}
+
+		&.serif {
+			input {
+				font-family: var(--family-serif);
+			}
+		}
+
+		&.sans-serif {
+			input {
+				font-family: var(--family-sans-serif);
 			}
 		}
 

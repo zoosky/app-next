@@ -1,4 +1,4 @@
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs';
 import Vue from 'vue';
 import VInput from './v-input.vue';
 import markdown from './readme.md';
@@ -22,13 +22,33 @@ export default {
 export const basic = () =>
 	defineComponent({
 		components: { RawValue },
+		props: {
+			placeholder: {
+				default: text('Placeholder', 'Enter a value...', 'Options'),
+			},
+			masked: {
+				default: boolean('Masked', false, 'Options'),
+			},
+			trim: {
+				default: boolean('Trim', false, 'Options'),
+			},
+			font: {
+				default: optionsKnob(
+					'Font',
+					{ Sans: 'sans-serif', Serif: 'serif', Mono: 'monospace' },
+					'sans-serif',
+					{ display: 'select' },
+					'Options'
+				),
+			},
+		},
 		setup() {
 			const value = ref(null);
 			return { value };
 		},
 		template: `
 			<div>
-				<v-input v-model="value" placeholder="Enter content..." />
+				<v-input v-model="value" v-bind="{placeholder, masked, trim, font}" />
 				<raw-value>{{ value }}</raw-value>
 			</div>
 		`,
@@ -42,7 +62,7 @@ export const monospace = () => ({
 	},
 	template: `
 <div>
-<v-input v-model="value" placeholder="Enter content..." monospace />
+<v-input v-model="value" placeholder="Enter content..." font="monospace" />
 </div>
 `,
 });

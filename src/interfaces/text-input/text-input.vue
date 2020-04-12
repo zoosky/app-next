@@ -1,16 +1,21 @@
 <template>
 	<v-input
-		:monospace="monospace"
+		:font="font"
 		:value="value"
 		:placeholder="placeholder"
-		:disabled="disabled"
+		:disabled="readonly"
+		:trim="trim"
+		:masked="masked"
 		full-width
 		@input="$listeners.input"
-	/>
+	>
+		<template v-if="iconLeft" #prepend><v-icon :name="iconLeft" /></template>
+		<template v-if="iconRight" #append><v-icon :name="iconRight" /></template>
+	</v-input>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 
 export default defineComponent({
 	props: {
@@ -18,17 +23,33 @@ export default defineComponent({
 			type: String,
 			default: null,
 		},
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
-		monospace: {
+		readonly: {
 			type: Boolean,
 			default: false,
 		},
 		placeholder: {
 			type: String,
 			default: null,
+		},
+		masked: {
+			type: Boolean,
+			default: false,
+		},
+		iconLeft: {
+			type: String,
+			default: null,
+		},
+		iconRight: {
+			type: String,
+			default: null,
+		},
+		trim: {
+			type: Boolean,
+			default: true,
+		},
+		font: {
+			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
+			default: 'sans-serif',
 		},
 	},
 });
