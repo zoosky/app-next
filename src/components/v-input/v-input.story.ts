@@ -26,9 +26,6 @@ export const basic = () =>
 			placeholder: {
 				default: text('Placeholder', 'Enter a value...', 'Options'),
 			},
-			masked: {
-				default: boolean('Masked', false, 'Options'),
-			},
 			trim: {
 				default: boolean('Trim', false, 'Options'),
 			},

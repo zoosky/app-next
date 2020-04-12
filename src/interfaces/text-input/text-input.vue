@@ -5,7 +5,7 @@
 		:placeholder="placeholder"
 		:disabled="readonly"
 		:trim="trim"
-		:masked="masked"
+		:type="masked ? 'password' : 'text'"
 		full-width
 		@input="$listeners.input"
 	>

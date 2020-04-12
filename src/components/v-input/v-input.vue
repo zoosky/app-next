@@ -12,7 +12,6 @@
 				v-bind="$attrs"
 				v-focus="autofocus"
 				v-on="_listeners"
-				:type="masked ? 'password' : 'text'"
 				:disabled="disabled"
 				:value="value"
 			/>
@@ -73,10 +72,6 @@ export default defineComponent({
 		trim: {
 			type: Boolean,
 			default: true,
-		},
-		masked: {
-			type: Boolean,
-			default: false,
 		},
 	},
 	setup(props, { emit, listeners }) {
