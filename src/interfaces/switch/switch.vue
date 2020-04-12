@@ -1,6 +1,13 @@
 <template>
 	<div class="interface-switch">
-		<v-switch v-model="inputValue" :label="label" />
+		<v-switch
+			v-model="inputValue"
+			:label="label"
+			:style="[
+				colorOn ? { '--v-switch-color': `var(--${colorOn}, ${colorOn})` } : null,
+				colorOff ? { '--v-switch-color-off': `var(--${colorOff}, ${colorOff})` } : null,
+			]"
+		/>
 	</div>
 </template>
 
@@ -18,7 +25,7 @@ export default defineComponent({
 			default: null,
 		},
 		inputValue: {
-			type: [Boolean, Array],
+			type: Boolean,
 			default: false,
 		},
 		labelOn: {
@@ -29,12 +36,17 @@ export default defineComponent({
 			type: String,
 			default: null,
 		},
+		colorOn: {
+			type: String,
+			default: null,
+		},
+		colorOff: {
+			type: String,
+			default: null,
+		},
 	},
 	setup(props) {
 		const label = computed<string>(() => {
-			if (props.inputValue instanceof Array) {
-				return props.inputValue.includes(props.value) ? props.labelOn : props.labelOff;
-			}
 			return props.inputValue === true ? props.labelOn : props.labelOff;
 		});
 		return { label };

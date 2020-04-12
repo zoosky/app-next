@@ -25,6 +25,12 @@ export const basic = () =>
 			labelOff: {
 				default: text('Label Off', '', 'Options'),
 			},
+			colorOn: {
+				default: text('Color On', '', 'Options'),
+			},
+			colorOff: {
+				default: text('Color Off', '', 'Options'),
+			},
 		},
 		setup() {
 			const onChange = action('change');
@@ -33,7 +39,7 @@ export const basic = () =>
 		},
 		template: `
 			<interface-switch
-        v-bind="{ labelOn, labelOff }"
+        v-bind="{ labelOn, labelOff, colorOn, colorOff }"
         @change="onChange"
         value="test"
         v-model="checked"

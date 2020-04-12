@@ -19,5 +19,17 @@ export default defineInterface(({ i18n }) => ({
 			width: 'half',
 			interface: 'text-input',
 		},
+		{
+			field: 'colorOn',
+			name: 'Color On',
+			width: 'half',
+			interface: 'text-input',
+		},
+		{
+			field: 'colorOff',
+			name: 'Color Off',
+			width: 'half',
+			interface: 'text-input',
+		},
 	],
 }));

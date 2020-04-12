@@ -1,10 +1,9 @@
 <template>
 	<div class="interface-toggle">
-		<v-icon :name="icon" />
-		<v-switch
+		<v-checkbox
 			v-model="inputValue"
 			:label="label"
-			:style="color ? { '--v-switch-color': color } : null"
+			:style="color ? { '--v-checkbox-color': color } : null"
 		/>
 	</div>
 </template>

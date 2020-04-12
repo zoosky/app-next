@@ -73,12 +73,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .v-switch {
 	--v-switch-color: var(--foreground-normal);
+	--v-switch-color-off: transparent;
 
 	display: flex;
 	align-items: center;
+	order: none;
 	font-size: 0;
 	background-color: transparent;
-	border: none;
 	border-radius: 0;
 	appearance: none;
 
@@ -88,6 +89,7 @@ export default defineComponent({
 		width: 44px;
 		height: 24px;
 		vertical-align: middle;
+		background: var(--v-switch-color-off);
 		border: var(--border-width) solid var(--border-normal);
 		border-radius: 12px;
 		transition: var(--fast) var(--transition);

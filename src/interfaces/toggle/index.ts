@@ -3,7 +3,7 @@ import { defineInterface } from '@/interfaces/define';
 
 export default defineInterface(({ i18n }) => ({
 	id: 'toggle',
-	name: i18n.t('interfaces.switch.switch'),
+	name: i18n.t('interfaces.toggle.toggle'),
 	icon: 'toggle_on',
 	component: InterfaceToggle,
 	options: [
