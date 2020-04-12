@@ -2,12 +2,11 @@
 	<div class="interface-toggle">
 		<v-checkbox
 			v-model="inputValue"
-			:label="label"
 			:style="[
 				colorOn ? { '--v-checkbox-color': `var(--${colorOn}, ${colorOn})` } : null,
 				colorOff ? { '--v-checkbox-color-off': `var(--${colorOff}, ${colorOff})` } : null,
 			]"
-			v-bind="{ iconOn, iconOff }"
+			v-bind="{ iconOn, iconOff, label }"
 		/>
 	</div>
 </template>
