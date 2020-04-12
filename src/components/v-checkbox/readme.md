@@ -86,16 +86,16 @@ If you can't, you should listen to the `update:indeterminate` event and respond 
 
 ## Props
 
-| Prop            | Description                                                                             | Default |
-| --------------- | --------------------------------------------------------------------------------------- | ------- |
-| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML                | `--`    |
-| `inputValue`    | Value that's used with `v-model`. Either boolean or array of values                     | `false` |
-| `label`         | Label for the checkbox                                                                  | `--`    |
-| `disabled`      | Disable the checkbox                                                                    | `false` |
-| `indeterminate` | Show the indeterminate state                                                            | `false` |
-| `iconOn`        | Icon for the on state. Else renders checkbox                                            | `null`  |
-| `iconOff`       | Icon for the off state. Automatically rendered in outline style. Else renders empty box | `null`  |
-| `iconIndet`     | Icon for the indeterminate state. Else renders indeterminate checkbox                   | `null`  |
+| Prop            | Description                                                                                            | Default |
+| --------------- | ------------------------------------------------------------------------------------------------------ | ------- |
+| `value`         | Value for checkbox. Similar to value attr on checkbox type input in HTML                               | `--`    |
+| `inputValue`    | Value that's used with `v-model`. Either boolean or array of values                                    | `false` |
+| `label`         | Label for the checkbox                                                                                 | `--`    |
+| `disabled`      | Disable the checkbox                                                                                   | `false` |
+| `indeterminate` | Show the indeterminate state                                                                           | `false` |
+| `iconOn`        | Icon for the on state. Else renders checkbox                                                           | `null`  |
+| `iconOff`       | Icon for the off state. Automatically rendered in outline style (if available). Else renders empty box | `null`  |
+| `iconIndet`     | Icon for the indeterminate state. Else renders indeterminate checkbox                                  | `null`  |
 
 ## Slots
 
