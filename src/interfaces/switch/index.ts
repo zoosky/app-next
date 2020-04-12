@@ -19,17 +19,5 @@ export default defineInterface(({ i18n }) => ({
 			width: 'half',
 			interface: 'text-input',
 		},
-		{
-			field: 'checkbox',
-			name: 'Checkbox',
-			width: 'half',
-			interface: 'switch',
-		},
-		{
-			field: 'readonly',
-			name: 'Readonly',
-			width: 'half',
-			interface: 'switch',
-		},
 	],
 }));

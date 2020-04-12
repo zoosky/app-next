@@ -1,7 +1,6 @@
 <template>
 	<div class="interface-switch">
-		<v-checkbox v-if="checkbox" v-model="inputValue" :label="label" :disabled="readonly" />
-		<v-switch v-else v-model="inputValue" :label="label" :disabled="readonly" />
+		<v-switch v-model="inputValue" :label="label" />
 	</div>
 </template>
 
@@ -22,10 +21,6 @@ export default defineComponent({
 			type: [Boolean, Array],
 			default: false,
 		},
-		readonly: {
-			type: Boolean,
-			default: false,
-		},
 		labelOn: {
 			type: String,
 			default: null,
@@ -33,10 +28,6 @@ export default defineComponent({
 		labelOff: {
 			type: String,
 			default: null,
-		},
-		checkbox: {
-			type: Boolean,
-			default: false,
 		},
 	},
 	setup(props) {
