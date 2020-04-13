@@ -1,5 +1,5 @@
 <template>
-	<div className="interface-text-input">
+	<div class="interface-text-input">
 		<v-input
 			:font="font"
 			:value="value"
