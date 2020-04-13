@@ -1,11 +1,13 @@
 <template>
-	<v-textarea
-		v-bind="{ placeholder, trim, font }"
-		:value="value"
-		:disabled="readonly"
-		@input="$listeners.input"
-		full-width
-	/>
+	<div class="interface-textarea">
+		<v-textarea
+			v-bind="{ placeholder, trim, font }"
+			:value="value"
+			:disabled="readonly"
+			@input="$listeners.input"
+			full-width
+		/>
+	</div>
 </template>
 
 <script lang="ts">
