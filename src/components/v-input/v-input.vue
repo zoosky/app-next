@@ -16,6 +16,32 @@
 				:value="value"
 			/>
 			<span v-if="suffix" class="suffix">{{ suffix }}</span>
+			<span v-if="($attrs.type === 'number')">
+				<span
+					class="step-up"
+					:class="{
+						disabled:
+							value !== '' &&
+							value !== null &&
+							parseInt(value) === parseInt($attrs.max),
+					}"
+					@mousedown="stepUpListener"
+				>
+					<v-icon name="keyboard_arrow_up" />
+				</span>
+				<span
+					class="step-down"
+					:class="{
+						disabled:
+							value !== '' &&
+							value !== null &&
+							parseInt(value) === parseInt($attrs.min),
+					}"
+					@mousedown="stepDownListener"
+				>
+					<v-icon name="keyboard_arrow_down" />
+				</span>
+			</span>
 			<div v-if="$slots.append" class="append">
 				<slot name="append" :value="value" :disabled="disabled" />
 			</div>
@@ -70,13 +96,17 @@ export default defineComponent({
 			default: '-',
 		},
 	},
-	setup(props, { emit, listeners }) {
+	setup(props, { emit, listeners, attrs }) {
 		const _listeners = computed(() => ({
 			...listeners,
 			input: emitValue,
+			change:
+				attrs.type === 'number'
+					? (e: MouseEvent) => emit('input', (e.target as HTMLInputElement).value)
+					: listeners.change,
 		}));
 
-		return { _listeners };
+		return { _listeners, stepUpListener, stepDownListener };
 
 		function emitValue(event: InputEvent) {
 			let value = (event.target as HTMLInputElement).value;
@@ -87,16 +117,49 @@ export default defineComponent({
 
 			emit('input', value);
 		}
+
+		function stepUpListener(event: MouseEvent) {
+			event.preventDefault();
+			const target = event.target as HTMLInputElement;
+			const input = target
+				.closest('div')
+				?.querySelector('input[type=number]') as HTMLInputElement;
+			input.stepUp(parseInt(attrs.step) ?? 1);
+			input.dispatchEvent(new Event('change'));
+		}
+
+		function stepDownListener(event: MouseEvent) {
+			event.preventDefault();
+			const target = event.target as HTMLInputElement;
+			const input = target
+				.closest('div')
+				?.querySelector('input[type=number]') as HTMLInputElement;
+			input.stepDown(parseInt(attrs.step) ?? 1);
+			input.dispatchEvent(new Event('change'));
+		}
 	},
 });
 </script>
 
 <style lang="scss" scoped>
 .v-input {
+	--arrow-color: var(--border-normal);
+
 	display: flex;
 	align-items: center;
 	width: max-content;
 	height: var(--input-height);
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		margin: 0;
+		-webkit-appearance: none;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
 
 	.prepend-outer {
 		margin-right: 8px;
@@ -118,19 +181,50 @@ export default defineComponent({
 			margin-right: 8px;
 		}
 
+		.step-up {
+			margin-bottom: -8px;
+		}
+
+		.step-down {
+			margin-top: -8px;
+		}
+
+		.step-up,
+		.step-down {
+			display: block;
+			color: var(--arrow-color);
+			cursor: pointer;
+
+			&:active:not(.disabled) {
+				transform: scale(0.9);
+			}
+
+			&.disabled {
+				--arrow-color: var(--border-normal);
+
+				cursor: auto;
+			}
+		}
+
 		&:hover {
+			--arrow-color: var(--border-normal-alt);
+
 			color: var(--foreground-normal);
 			background-color: var(--background-page);
 			border-color: var(--border-normal-alt);
 		}
 
 		&:focus-within {
+			--arrow-color: var(--primary);
+
 			color: var(--foreground-normal);
 			background-color: var(--background-page);
 			border-color: var(--primary);
 		}
 
 		&.disabled {
+			--arrow-color: var(--border-normal);
+
 			color: var(--foreground-subdued);
 			background-color: var(--background-subdued);
 			border-color: var(--border-normal);

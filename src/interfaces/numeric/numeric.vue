@@ -61,18 +61,3 @@ export default defineComponent({
 	},
 });
 </script>
-
-<style scoped lang="scss">
-.interface-numeric {
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		margin: 0;
-		-webkit-appearance: none;
-	}
-
-	/* Firefox */
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-}
-</style>
