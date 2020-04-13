@@ -25,9 +25,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import { makeFactory, makeGuard } from '@/utils/factory';
 
-const options = {
+export default defineComponent({
 	props: {
 		value: {
 			type: String,
@@ -43,15 +42,15 @@ const options = {
 		},
 		minValue: {
 			type: Number,
-			default: null,
+			default: '',
 		},
 		maxValue: {
 			type: Number,
-			default: null,
+			default: '',
 		},
 		stepInterval: {
 			type: Number,
-			default: null,
+			default: 1,
 		},
 		iconLeft: {
 			type: String,
@@ -67,15 +66,8 @@ const options = {
 		},
 		displayComponent: {
 			type: String,
-			default: null,
+			required: true,
 		},
 	},
-};
-
-export const numericInterfaceFactory = makeFactory(options, ({ displayComponent, id }) => ({
-	name: 'numeric-' + id,
-	displayComponent,
-}));
-
-export default makeGuard(options);
+});
 </script>

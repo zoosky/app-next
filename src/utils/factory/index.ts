@@ -1,4 +1,4 @@
-import { makeFactory, makeGuard } from './factory';
+import { interfaceFactory, componentFactory } from './factory';
 
-export { makeFactory, makeGuard };
-export default { makeFactory, makeGuard };
+export { interfaceFactory, componentFactory };
+export default { interfaceFactory, componentFactory };
