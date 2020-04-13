@@ -1,11 +1,11 @@
-import InterfaceNumeric from './numeric.vue';
+import { numericInterfaceFactory } from './numeric.vue';
 import { defineInterface } from '@/interfaces/define';
 
 export default defineInterface(({ i18n }) => ({
 	id: 'numeric',
 	name: i18n.t('interfaces.numeric.numeric'),
 	icon: 'dialpad',
-	component: InterfaceNumeric,
+	component: numericInterfaceFactory({ displayComponent: 'v-slider', id: 'slider' }),
 	options: [
 		{
 			field: 'placeholder',

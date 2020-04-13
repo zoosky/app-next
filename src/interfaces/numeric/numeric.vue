@@ -1,6 +1,7 @@
 <template>
-	<div className="interface-numeric">
-		<v-input
+	<div class="interface-numeric">
+		<component
+			:is="displayComponent"
 			type="number"
 			:font="font"
 			:value="value"
@@ -12,15 +13,21 @@
 			full-width
 			@input="$listeners.input"
 		>
-			<template v-if="iconLeft" #prepend><v-icon :name="iconLeft" /></template>
-			<template v-if="iconRight" #append><v-icon :name="iconRight" /></template>
-		</v-input>
+			<template v-if="iconLeft" #prepend>
+				<v-icon :name="iconLeft" />
+			</template>
+			<template v-if="iconRight" #append>
+				<v-icon :name="iconRight" />
+			</template>
+		</component>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-export default defineComponent({
+import { makeFactory, makeGuard } from '@/utils/factory';
+
+const options = {
 	props: {
 		value: {
 			type: String,
@@ -58,6 +65,17 @@ export default defineComponent({
 			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
 			default: 'sans-serif',
 		},
+		displayComponent: {
+			type: String,
+			default: null,
+		},
 	},
-});
+};
+
+export const numericInterfaceFactory = makeFactory(options, ({ displayComponent, id }) => ({
+	name: 'numeric-' + id,
+	displayComponent,
+}));
+
+export default makeGuard(options);
 </script>
