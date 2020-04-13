@@ -1,17 +1,19 @@
 <template>
-	<v-input
-		:font="font"
-		:value="value"
-		:placeholder="placeholder"
-		:disabled="readonly"
-		:trim="trim"
-		:type="masked ? 'password' : 'text'"
-		full-width
-		@input="$listeners.input"
-	>
-		<template v-if="iconLeft" #prepend><v-icon :name="iconLeft" /></template>
-		<template v-if="iconRight" #append><v-icon :name="iconRight" /></template>
-	</v-input>
+	<div className="interface-text-input">
+		<v-input
+			:font="font"
+			:value="value"
+			:placeholder="placeholder"
+			:disabled="readonly"
+			:trim="trim"
+			:type="masked ? 'password' : 'text'"
+			full-width
+			@input="$listeners.input"
+		>
+			<template v-if="iconLeft" #prepend><v-icon :name="iconLeft" /></template>
+			<template v-if="iconRight" #append><v-icon :name="iconRight" /></template>
+		</v-input>
+	</div>
 </template>
 
 <script lang="ts">
