@@ -13,9 +13,7 @@ describe('Interfaces / Text Input', () => {
 		const component = shallowMount(InterfaceTextarea, {
 			localVue,
 			propsData: {
-				options: {
-					placeholder: 'Enter value...',
-				},
+				placeholder: 'Enter value...',
 			},
 			listeners: {
 				input: () => {},
