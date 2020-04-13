@@ -1,0 +1,78 @@
+<template>
+	<div className="interface-numeric">
+		<v-input
+			type="number"
+			:font="font"
+			:value="value"
+			:placeholder="placeholder"
+			:disabled="readonly"
+			:min="minValue"
+			:max="maxValue"
+			:step="stepInterval"
+			full-width
+			@input="$listeners.input"
+		>
+			<template v-if="iconLeft" #prepend><v-icon :name="iconLeft" /></template>
+			<template v-if="iconRight" #append><v-icon :name="iconRight" /></template>
+		</v-input>
+	</div>
+</template>
+
+<script lang="ts">
+import { defineComponent, PropType } from '@vue/composition-api';
+export default defineComponent({
+	props: {
+		value: {
+			type: String,
+			default: null,
+		},
+		readonly: {
+			type: Boolean,
+			default: false,
+		},
+		placeholder: {
+			type: String,
+			default: null,
+		},
+		minValue: {
+			type: Number,
+			default: null,
+		},
+		maxValue: {
+			type: Number,
+			default: null,
+		},
+		stepInterval: {
+			type: Number,
+			default: null,
+		},
+		iconLeft: {
+			type: String,
+			default: null,
+		},
+		iconRight: {
+			type: String,
+			default: null,
+		},
+		font: {
+			type: String as PropType<'sans-serif' | 'serif' | 'monospace'>,
+			default: 'sans-serif',
+		},
+	},
+});
+</script>
+
+<style scoped lang="scss">
+.interface-numeric {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		margin: 0;
+		-webkit-appearance: none;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+}
+</style>
