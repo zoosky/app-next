@@ -13,7 +13,7 @@
 			</v-input>
 		</template>
 
-		<v-list>
+		<v-list dense>
 			<v-list-item
 				v-for="item in _items"
 				:key="item.value"
@@ -23,9 +23,7 @@
 				@click="multiple ? null : $emit('input', item.value)"
 			>
 				<v-list-item-content>
-					<v-list-item-title v-if="multiple === false">
-						<span :class="{ monospace }">{{ item.text }}</span>
-					</v-list-item-title>
+					<span v-if="multiple === false" :class="{ monospace }">{{ item.text }}</span>
 					<v-checkbox
 						v-else
 						:inputValue="value || []"
