@@ -17,7 +17,12 @@
 		</portal>
 
 		<div class="grid">
+			<template v-if="loading">
+				<card v-for="n in 15" :key="`loader-${n}`" loading />
+			</template>
+
 			<card
+				v-else
 				v-for="item in items"
 				:key="item[primaryKeyField.field]"
 				:crop="crop"
@@ -31,11 +36,12 @@
 					<render-template :collection="collection" :item="item" :template="subtitle" />
 				</template>
 			</card>
-
-			<template v-if="loading">
-				<card v-for="n in 15" :key="`loader-${n}`" loading />
-			</template>
 		</div>
+		<v-info
+			v-if="loading === false && items.length === 0"
+			:title="$tc('item_count', 0)"
+			icon="box"
+		/>
 	</div>
 </template>
 
@@ -226,5 +232,9 @@ export default defineComponent({
 	grid-gap: calc(0.1666666667 * var(--size)) 24px;
 	grid-template-columns: repeat(auto-fit, var(--size));
 	justify-content: space-between;
+}
+
+.v-info {
+	margin: 20vh 0;
 }
 </style>

@@ -17,7 +17,6 @@ export default defineComponent({
 		type: {
 			type: String,
 			default: 'input',
-			validator: (type: string) => ['input', 'input-tall', 'list-item-icon'].includes(type),
 		},
 	},
 });
