@@ -5,28 +5,58 @@
 				<v-slider v-model="size" :min="100" :max="200" :step="1" />
 			</drawer-detail>
 			<drawer-detail icon="settings" :title="$t('setup')">
-				<div class="type-label">{{ $t('layouts.cards.image_source') }}</div>
-				<v-select
-					v-model="imageSource"
-					full-width
-					allow-null
-					item-value="field"
-					item-text="name"
-					:items="fileFields"
-				/>
+				<div class="setting">
+					<div class="label type-text">{{ $t('layouts.cards.image_source') }}</div>
+					<v-select
+						v-model="imageSource"
+						full-width
+						allow-null
+						item-value="field"
+						item-text="name"
+						:items="fileFields"
+					/>
+				</div>
+
+				<div class="setting">
+					<div class="label type-text">{{ $t('layouts.cards.image_fit') }}</div>
+					<v-select
+						v-model="imageFit"
+						full-width
+						:items="[
+							{
+								text: $t('layouts.cards.crop'),
+								value: 'crop',
+							},
+							{
+								text: $t('layouts.cards.contain'),
+								value: 'contain',
+							},
+						]"
+					/>
+				</div>
+
+				<div class="setting">
+					<div class="label type-text">{{ $t('layouts.cards.title') }}</div>
+					<v-input full-width v-model="title" />
+				</div>
+
+				<div class="setting">
+					<div class="label type-text">{{ $t('layouts.cards.subtitle') }}</div>
+					<v-input full-width v-model="subtitle" />
+				</div>
 			</drawer-detail>
 		</portal>
 
 		<div class="grid">
 			<template v-if="loading">
-				<card v-for="n in 15" :key="`loader-${n}`" loading />
+				<card v-for="n in 14" :key="`loader-${n}`" loading />
 			</template>
 
 			<card
 				v-else
 				v-for="item in items"
 				:key="item[primaryKeyField.field]"
-				:crop="crop"
+				:crop="imageFit === 'crop'"
 				:icon="icon"
 				:file="imageSource ? item[imageSource] : null"
 				:item="item"
@@ -60,6 +90,7 @@ import Card from './components/card.vue';
 import getFieldsFromTemplate from '@/utils/get-fields-from-template';
 import { render } from 'micromustache';
 import useProjectsStore from '@/stores/projects';
+import { debounce } from 'lodash';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Item = Record<string, any>;
@@ -67,10 +98,10 @@ type Item = Record<string, any>;
 type ViewOptions = {
 	size?: number;
 	icon?: string;
-	crop?: boolean;
 	imageSource?: string;
 	title?: string;
 	subtitle?: string;
+	imageFit?: 'crop' | 'contain';
 };
 
 type ViewQuery = {
@@ -135,7 +166,7 @@ export default defineComponent({
 			return [...availableFields.value.filter((field) => field.type === 'file')];
 		});
 
-		const { crop, size, icon, imageSource, title, subtitle } = useViewOptions();
+		const { size, icon, imageSource, title, subtitle, imageFit } = useViewOptions();
 		const { sort, limit, page, fields } = useViewQuery();
 
 		const { items, loading, error, totalPages, itemCount } = useItems(collection, {
@@ -160,12 +191,12 @@ export default defineComponent({
 			size,
 			primaryKeyField,
 			icon,
-			crop,
 			fileFields,
 			imageSource,
 			title,
 			subtitle,
 			getLinkForItem,
+			imageFit,
 		};
 
 		function toPage(newPage: number) {
@@ -178,22 +209,24 @@ export default defineComponent({
 
 		function useViewOptions() {
 			const size = createViewOption('size', 120);
-			const crop = createViewOption('crop', true);
 			const icon = createViewOption('icon', 'box');
 			const title = createViewOption<string>('title', null);
 			const subtitle = createViewOption<string>('subtitle', null);
 			const imageSource = createViewOption<string>(
 				'imageSource',
-				fileFields.value[0]?.field || null
+				fileFields.value[0]?.field ?? null
 			);
+			const imageFit = createViewOption<string>('imageFit', 'crop');
 
-			return { size, crop, icon, imageSource, title, subtitle };
+			return { size, icon, imageSource, title, subtitle, imageFit };
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			function createViewOption<T>(key: keyof ViewOptions, defaultValue: any) {
 				return computed<T>({
 					get() {
-						return _viewOptions.value?.[key] || defaultValue;
+						return _viewOptions.value?.[key] !== undefined
+							? _viewOptions.value?.[key]
+							: defaultValue;
 					},
 					set(newValue: T) {
 						_viewOptions.value = {
@@ -251,6 +284,7 @@ export default defineComponent({
 			}
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		function getLinkForItem(item: Record<string, any>) {
 			const currentProjectKey = projectsStore.state.currentProjectKey;
 
@@ -258,6 +292,7 @@ export default defineComponent({
 				item: item,
 				collection: props.collection,
 				project: currentProjectKey,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				primaryKey: item[primaryKeyField.value!.field],
 			});
 		}
@@ -278,5 +313,13 @@ export default defineComponent({
 
 .v-info {
 	margin: 20vh 0;
+}
+
+.label {
+	margin-bottom: 4px;
+}
+
+.setting {
+	margin-bottom: 12px;
 }
 </style>
