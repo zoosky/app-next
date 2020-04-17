@@ -2,7 +2,7 @@
 	<div class="render-template">
 		<template v-for="(part, index) in parts">
 			<component
-				v-if="typeof part === 'object'"
+				v-if="part !== null && typeof part === 'object'"
 				:is="`display-${part.component}`"
 				:key="index"
 				:value="part.value"
@@ -53,7 +53,7 @@ export default defineComponent({
 
 			// Try getting the value from the item, return some question marks if it doesn't exist
 			const value = get(props.item, fieldKey);
-			if (!value) return '???';
+			if (value === undefined) return '???';
 
 			// If no display is configured, we can render the raw value
 			if (field.display === null) return value;
