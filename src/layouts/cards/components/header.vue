@@ -10,7 +10,7 @@
 			<v-menu show-arrow placement="bottom">
 				<template #activator="{ toggle }">
 					<div class="sort-selector" @click="toggle">
-						{{ sortField.name }}
+						{{ sortField && sortField.name }}
 					</div>
 				</template>
 
@@ -86,6 +86,7 @@ export default defineComponent({
 .cards-header {
 	position: sticky;
 	top: var(--layout-offset-top);
+	z-index: 4;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

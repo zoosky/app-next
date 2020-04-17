@@ -80,6 +80,17 @@
 				</template>
 			</card>
 		</div>
+
+		<div class="pagination" v-if="totalPages > 1">
+			<v-pagination
+				:length="totalPages"
+				:total-visible="5"
+				show-first-last
+				:value="page"
+				@input="toPage"
+			/>
+		</div>
+
 		<v-info
 			v-if="loading === false && items.length === 0"
 			:title="$tc('item_count', 0)"
@@ -338,5 +349,13 @@ export default defineComponent({
 
 .setting {
 	margin-bottom: 12px;
+}
+
+.pagination {
+	position: sticky;
+	left: 0;
+	width: 100%;
+	padding: 32px;
+	text-align: center;
 }
 </style>
