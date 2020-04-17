@@ -25,10 +25,10 @@
 				:file="imageSource ? item[imageSource] : null"
 			>
 				<template #title v-if="title">
-					<render-template :collection="collection">{{ title }}</render-template>
+					<render-template :collection="collection" :item="item" :template="title" />
 				</template>
 				<template #subtitle v-if="subtitle">
-					<render-template :collection="collection">{{ subtitle }}</render-template>
+					<render-template :collection="collection" :item="item" :template="subtitle" />
 				</template>
 			</card>
 		</div>
