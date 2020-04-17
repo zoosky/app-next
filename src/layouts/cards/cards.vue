@@ -52,6 +52,7 @@ import useSync from '@/compositions/use-sync/';
 import useCollection from '@/compositions/use-collection/';
 import useItems from '@/compositions/use-items';
 import Card from './components/card.vue';
+import getFieldsFromTemplate from '@/utils/get-fields-from-template';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Item = Record<string, any>;
@@ -126,17 +127,16 @@ export default defineComponent({
 			return availableFields.value.filter((field) => field.type === 'file');
 		});
 
-		const { sort, limit, page } = useItemOptions();
+		const { crop, size, icon, imageSource, title, subtitle } = useViewOptions();
+		const { sort, limit, page, fields } = useViewQuery();
 
 		const { items, loading, error, totalPages, itemCount } = useItems(collection, {
 			sort,
 			limit,
 			page,
-			fields: ref(['*']),
+			fields: fields,
 			filters: _filters,
 		});
-
-		const { crop, size, icon, imageSource, title, subtitle } = useViewOptions();
 
 		return {
 			_selection,
@@ -171,9 +171,12 @@ export default defineComponent({
 			const size = createViewOption('size', 120);
 			const crop = createViewOption('crop', true);
 			const icon = createViewOption('icon', 'box');
-			const title = createViewOption('title', null);
-			const subtitle = createViewOption('subtitle', null);
-			const imageSource = createViewOption('imageSource', fileFields.value[0]?.field || null);
+			const title = createViewOption<string>('title', null);
+			const subtitle = createViewOption<string>('subtitle', null);
+			const imageSource = createViewOption<string>(
+				'imageSource',
+				fileFields.value[0]?.field || null
+			);
 
 			return { size, crop, icon, imageSource, title, subtitle };
 
@@ -193,14 +196,34 @@ export default defineComponent({
 			}
 		}
 
-		function useItemOptions() {
+		function useViewQuery() {
 			const page = ref(1);
 
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const sort = createItemOption<string>('sort', primaryKeyField.value!.field);
 			const limit = createItemOption<number>('limit', 25);
 
-			return { sort, limit, page };
+			const fields = computed<string[]>(() => {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				const fields = [primaryKeyField.value!.field];
+
+				if (imageSource.value) {
+					fields.push(`${imageSource.value}.type`);
+					fields.push(`${imageSource.value}.data`);
+				}
+
+				if (title.value) {
+					fields.push(...getFieldsFromTemplate(title.value));
+				}
+
+				if (subtitle.value) {
+					fields.push(...getFieldsFromTemplate(subtitle.value));
+				}
+
+				return fields;
+			});
+
+			return { sort, limit, page, fields };
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			function createItemOption<T>(key: keyof ViewQuery, defaultValue: any) {
@@ -231,7 +254,6 @@ export default defineComponent({
 	display: grid;
 	grid-gap: calc(0.1666666667 * var(--size)) 24px;
 	grid-template-columns: repeat(auto-fit, var(--size));
-	justify-content: space-between;
 }
 
 .v-info {
