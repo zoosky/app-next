@@ -39,6 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from '@vue/composition-api';
+import i18n from '@/lang';
 
 type Item = {
 	text: string;
@@ -83,10 +84,14 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
+		allowNull: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	setup(props) {
-		const _items = computed(() =>
-			props.items.map((item) => {
+		const _items = computed(() => {
+			const items = props.items.map((item) => {
 				if (typeof item === 'string') {
 					return {
 						text: item,
@@ -98,8 +103,17 @@ export default defineComponent({
 					text: item[props.itemText],
 					value: item[props.itemValue],
 				};
-			})
-		);
+			});
+
+			if (props.allowNull) {
+				items.unshift({
+					text: i18n.t('none'),
+					value: null,
+				});
+			}
+
+			return items;
+		});
 
 		const displayValue = computed(() => {
 			if (Array.isArray(props.value)) {

@@ -9,6 +9,7 @@
 				<v-select
 					v-model="imageSource"
 					full-width
+					allow-null
 					item-value="field"
 					item-text="name"
 					:items="fileFields"
@@ -124,7 +125,7 @@ export default defineComponent({
 		);
 
 		const fileFields = computed(() => {
-			return availableFields.value.filter((field) => field.type === 'file');
+			return [...availableFields.value.filter((field) => field.type === 'file')];
 		});
 
 		const { crop, size, icon, imageSource, title, subtitle } = useViewOptions();

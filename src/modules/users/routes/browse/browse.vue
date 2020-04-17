@@ -7,7 +7,7 @@
 		</template>
 
 		<template #drawer>
-			<layout-drawer-detail v-model="viewTypeWithDefault" />
+			<layout-drawer-detail v-model="viewType" />
 			<filter-drawer-detail v-model="filters" collection="directus_users" />
 			<portal-target name="drawer" />
 		</template>
@@ -56,10 +56,10 @@
 		<component
 			class="layout"
 			ref="layout"
-			:is="`layout-${viewTypeWithDefault}`"
+			:is="`layout-${viewType}`"
 			collection="directus_users"
 			:selection.sync="selection"
-			:view-options.sync="viewOptionsWithDefaults"
+			:view-options.sync="viewOptions"
 			:view-query.sync="viewQuery"
 			:detail-route="'/{{project}}/users/{{item.role}}/{{primaryKey}}'"
 			:filters="_filters"
@@ -133,33 +133,19 @@ export default defineComponent({
 			];
 		});
 
-		const viewTypeWithDefault = computed({
-			get() {
-				if (!viewType.value) return 'cards';
-				return viewType.value;
-			},
-			set(newViewType: string) {
-				viewType.value = newViewType;
-			},
-		});
+		if (viewType.value === null) {
+			viewType.value = 'cards';
+		}
 
-		const viewOptionsWithDefaults = computed({
-			get() {
-				if (!viewOptions.value) {
-					if (viewTypeWithDefault.value === 'cards') {
-						return {
-							icon: 'person',
-							title: '{{first_name}} {{last_name}}',
-							subtitle: '{{ title }}',
-						};
-					}
-				}
-				return viewOptions.value;
-			},
-			set(newOptions: any) {
-				viewOptions.value = newOptions;
-			},
-		});
+		if (viewOptions.value === null) {
+			if ((viewType.value = 'cards')) {
+				viewOptions.value = {
+					icon: 'person',
+					title: '{{first_name}} {{last_name}}',
+					subtitle: '{{ title }}',
+				};
+			}
+		}
 
 		return {
 			_filters,
@@ -175,8 +161,6 @@ export default defineComponent({
 			viewOptions,
 			viewQuery,
 			viewType,
-			viewOptionsWithDefaults,
-			viewTypeWithDefault,
 		};
 
 		function useBatchDelete() {

@@ -225,6 +225,8 @@
 	"view_type": "View As...",
 	"setup": "Setup",
 
+	"none": "None",
+
   "about_directus": "About Directus",
   "activity_log": "Activity Log",
   "add_field_filter": "Add a field filter",
@@ -545,7 +547,6 @@
   "no_related_entries": "Has no related entries",
   "no_results": "No Results",
   "no_results_body": "The current filters do not match any collection items",
-  "none": "None",
   "not_authenticated": "Not Authenticated",
   "not_between": "Not between",
   "not_contains": "Doesn't contain",
