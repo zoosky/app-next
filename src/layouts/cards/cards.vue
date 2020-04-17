@@ -24,8 +24,12 @@
 				:icon="icon"
 				:file="imageSource ? item[imageSource] : null"
 			>
-				<template #title>{{ title }}</template>
-				<template #subtitle>{{ subtitle }}</template>
+				<template #title v-if="title">
+					<render-template :collection="collection">{{ title }}</render-template>
+				</template>
+				<template #subtitle v-if="subtitle">
+					<render-template :collection="collection">{{ subtitle }}</render-template>
+				</template>
 			</card>
 		</div>
 	</div>
