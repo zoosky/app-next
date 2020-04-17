@@ -69,7 +69,6 @@ export function useItems(collection: Ref<string>, options: Options) {
 		const hasAllItems = limit.value > (itemCount.value || 0);
 
 		if (hasAllItems) {
-			console.log(after);
 			sortItems(after);
 			return;
 		}
