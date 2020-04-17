@@ -227,6 +227,8 @@
 
 	"none": "None",
 
+	"n_items_selected": "No Items Selected | 1 Item Selected | {n} Items Selected",
+
   "about_directus": "About Directus",
   "activity_log": "Activity Log",
   "add_field_filter": "Add a field filter",

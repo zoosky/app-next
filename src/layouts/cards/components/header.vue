@@ -1,6 +1,11 @@
 <template>
 	<div class="cards-header">
-		<div class="start"></div>
+		<div class="start">
+			<div class="selected" v-if="_selection.length > 0">
+				<v-icon name="close" @click="_selection = []" />
+				{{ $tc('n_items_selected', _selection.length) }}
+			</div>
+		</div>
 		<div class="end">
 			<v-menu show-arrow placement="bottom">
 				<template #activator="{ toggle }">
@@ -53,6 +58,7 @@ export default defineComponent({
 	},
 	setup(props, { emit }) {
 		const _sort = useSync(props, 'sort', emit);
+		const _selection = useSync(props, 'selection', emit);
 		const descending = computed(() => props.sort.startsWith('-'));
 
 		const sortKey = computed(() =>
@@ -63,7 +69,7 @@ export default defineComponent({
 			return props.fields.find((field) => field.field === sortKey.value);
 		});
 
-		return { descending, toggleDescending, sortField, _sort, sortKey };
+		return { descending, toggleDescending, sortField, _sort, _selection, sortKey };
 
 		function toggleDescending() {
 			if (descending.value === true) {
@@ -86,6 +92,7 @@ export default defineComponent({
 	width: 100%;
 	height: 52px;
 	margin-bottom: 36px;
+	padding: 0 8px;
 	border-top: 2px solid var(--border-subdued);
 	border-bottom: 2px solid var(--border-subdued);
 }
