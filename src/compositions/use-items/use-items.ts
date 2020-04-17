@@ -6,6 +6,7 @@ import Vue from 'vue';
 import { isEqual } from 'lodash';
 import { Filter } from '@/stores/collection-presets/types';
 import filtersToQuery from '@/utils/filters-to-query';
+import { orderBy } from 'lodash';
 
 type Options = {
 	limit: Ref<number>;
@@ -64,12 +65,14 @@ export function useItems(collection: Ref<string>, options: Options) {
 			return;
 		}
 
-		/**
-		 * @NOTE
-		 * Ignore sorting through the API when the full set of items is already loaded. This requires
-		 * layouts to support client side sorting when the itemcount is less than the total items.
-		 */
-		if (limit.value > (itemCount.value || 0)) return;
+		// When all items are on page, we only sort locally
+		const hasAllItems = limit.value > (itemCount.value || 0);
+
+		if (hasAllItems) {
+			console.log(after);
+			sortItems(after);
+			return;
+		}
 
 		await Vue.nextTick();
 		if (loading.value === false) {
@@ -180,5 +183,11 @@ export function useItems(collection: Ref<string>, options: Options) {
 	function reset() {
 		items.value = [];
 		itemCount.value = null;
+	}
+
+	function sortItems(sort: string) {
+		const field = sort.startsWith('-') ? sort.substring(1) : sort;
+		const descending = sort.startsWith('-');
+		items.value = orderBy(items.value, [field], [descending ? 'desc' : 'asc']);
 	}
 }

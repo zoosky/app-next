@@ -53,6 +53,8 @@
 			</drawer-detail>
 		</portal>
 
+		<cards-header :fields="fieldsInCollection" :selection.sync="_selection" :sort.sync="sort" />
+
 		<div class="grid">
 			<template v-if="loading">
 				<card v-for="n in 14" :key="`loader-${n}`" loading />
@@ -96,7 +98,7 @@ import Card from './components/card.vue';
 import getFieldsFromTemplate from '@/utils/get-fields-from-template';
 import { render } from 'micromustache';
 import useProjectsStore from '@/stores/projects';
-import { debounce } from 'lodash';
+import CardsHeader from './components/header.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Item = Record<string, any>;
@@ -117,7 +119,7 @@ type ViewQuery = {
 };
 
 export default defineComponent({
-	components: { Card },
+	components: { Card, CardsHeader },
 	props: {
 		collection: {
 			type: String,
@@ -203,6 +205,8 @@ export default defineComponent({
 			subtitle,
 			getLinkForItem,
 			imageFit,
+			sort,
+			fieldsInCollection,
 		};
 
 		function toPage(newPage: number) {
@@ -248,8 +252,8 @@ export default defineComponent({
 			const page = ref(1);
 
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const sort = createItemOption<string>('sort', primaryKeyField.value!.field);
-			const limit = createItemOption<number>('limit', 25);
+			const sort = createViewQueryOption<string>('sort', primaryKeyField.value!.field);
+			const limit = createViewQueryOption<number>('limit', 25);
 
 			const fields = computed<string[]>(() => {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -268,13 +272,19 @@ export default defineComponent({
 					fields.push(...getFieldsFromTemplate(subtitle.value));
 				}
 
+				const sortField = sort.value.startsWith('-') ? sort.value.substring(1) : sort.value;
+
+				if (fields.includes(sortField) === false) {
+					fields.push(sortField);
+				}
+
 				return fields;
 			});
 
 			return { sort, limit, page, fields };
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			function createItemOption<T>(key: keyof ViewQuery, defaultValue: any) {
+			function createViewQueryOption<T>(key: keyof ViewQuery, defaultValue: any) {
 				return computed<T>({
 					get() {
 						return _viewQuery.value?.[key] || defaultValue;
@@ -309,6 +319,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .layout-cards {
 	padding: var(--content-padding);
+	padding-top: 0;
 }
 
 .grid {
