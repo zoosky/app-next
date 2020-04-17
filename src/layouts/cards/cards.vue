@@ -29,6 +29,10 @@
 				:crop="crop"
 				:icon="icon"
 				:file="imageSource ? item[imageSource] : null"
+				:item="item"
+				:select-mode="selectMode"
+				:to="getLinkForItem(item)"
+				v-model="_selection"
 			>
 				<template #title v-if="title">
 					<render-template :collection="collection" :item="item" :template="title" />
@@ -54,6 +58,8 @@ import useCollection from '@/compositions/use-collection/';
 import useItems from '@/compositions/use-items';
 import Card from './components/card.vue';
 import getFieldsFromTemplate from '@/utils/get-fields-from-template';
+import { render } from 'micromustache';
+import useProjectsStore from '@/stores/projects';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Item = Record<string, any>;
@@ -111,6 +117,7 @@ export default defineComponent({
 	},
 	setup(props, { emit }) {
 		const mainElement = inject('main-element', ref<Element>(null));
+		const projectsStore = useProjectsStore();
 
 		const _selection = useSync(props, 'selection', emit);
 		const _viewOptions = useSync(props, 'viewOptions', emit);
@@ -158,6 +165,7 @@ export default defineComponent({
 			imageSource,
 			title,
 			subtitle,
+			getLinkForItem,
 		};
 
 		function toPage(newPage: number) {
@@ -241,6 +249,19 @@ export default defineComponent({
 					},
 				});
 			}
+		}
+
+		function getLinkForItem(item: Record<string, any>) {
+			const currentProjectKey = projectsStore.state.currentProjectKey;
+
+			console.log(item);
+
+			return render(props.detailRoute, {
+				item: item,
+				collection: props.collection,
+				project: currentProjectKey,
+				primaryKey: item[primaryKeyField.value!.field],
+			});
 		}
 	},
 });

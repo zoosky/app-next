@@ -1,6 +1,9 @@
 <template>
-	<div class="card" :class="{ loading }">
-		<div class="header">
+	<div class="card" :class="{ loading }" @click="handleClick">
+		<div class="header" :class="{ selected: value.includes(item) }">
+			<div class="selection-indicator" :class="{ 'needs-shadow': !!imageSource }">
+				<v-icon :name="selectionIcon" @click.stop="toggleSelection" />
+			</div>
 			<v-skeleton-loader v-if="loading" />
 			<template v-else>
 				<p v-if="type" class="type type-title">{{ type }}</p>
@@ -20,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from '@vue/composition-api';
+import router from '@/router';
 
 type File = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,8 +55,24 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
+		item: {
+			type: Object as PropType<Record<string, any>>,
+			default: null,
+		},
+		value: {
+			type: Array as PropType<Record<string, any>[]>,
+			default: () => [],
+		},
+		selectMode: {
+			type: Boolean,
+			default: false,
+		},
+		to: {
+			type: String,
+			default: '',
+		},
 	},
-	setup(props) {
+	setup(props, { emit }) {
 		const type = computed(() => {
 			if (props.file === null) return null;
 			if (props.file.type.startsWith('image')) return null;
@@ -77,12 +97,39 @@ export default defineComponent({
 			return thumbnail.url;
 		});
 
-		return { imageSource, type };
+		const selectionIcon = computed(() =>
+			props.value.includes(props.item) ? 'check_circle' : 'radio_button_unchecked'
+		);
+
+		return { imageSource, type, selectionIcon, toggleSelection, handleClick };
+
+		function toggleSelection() {
+			if (props.value.includes(props.item)) {
+				emit(
+					'input',
+					props.value.filter((item) => item !== props.item)
+				);
+			} else {
+				emit('input', [...props.value, props.item]);
+			}
+		}
+
+		function handleClick() {
+			if (props.selectMode === true) {
+				toggleSelection();
+			} else {
+				router.push(props.to);
+			}
+		}
 	},
 });
 </script>
 
 <style lang="scss" scoped>
+.card {
+	cursor: pointer;
+}
+
 .header {
 	position: relative;
 	display: flex;
@@ -93,6 +140,10 @@ export default defineComponent({
 	overflow: hidden;
 	background-color: var(--background-normal);
 	border-radius: var(--border-radius);
+
+	&.selected {
+		background-color: var(--background-normal-alt);
+	}
 
 	img {
 		position: absolute;
@@ -117,6 +168,32 @@ export default defineComponent({
 		left: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	.selection-indicator {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		width: 100%;
+		height: 30%;
+
+		.v-icon {
+			--v-icon-color: var(--white);
+
+			margin: 5%;
+		}
+
+		&.needs-shadow::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: linear-gradient(-180deg, #263238 10%, rgba(38, 50, 56, 0));
+			opacity: 0.3;
+			content: '';
+		}
 	}
 }
 
