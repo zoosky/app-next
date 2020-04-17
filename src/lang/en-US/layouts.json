@@ -2,7 +2,8 @@
 	"layouts": {
 		"cards": {
 			"cards": "Cards",
-			"size": "Size"
+			"size": "Size",
+			"image_source": "Image Source"
 		},
 		"tabular": {
 			"tabular": "Table",

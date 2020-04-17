@@ -223,6 +223,7 @@
 	"upload_file_success": "File Uploaded | {count} Files Uploaded",
 	"upload_file_failed": "Couldn't Upload File | Couldn't Upload Files",
 	"view_type": "View As...",
+	"setup": "Setup",
 
   "about_directus": "About Directus",
   "activity_log": "Activity Log",

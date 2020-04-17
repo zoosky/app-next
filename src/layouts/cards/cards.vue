@@ -4,15 +4,29 @@
 			<drawer-detail icon="crop_square" :title="$t('layouts.cards.size')">
 				<v-slider v-model="size" :min="100" :max="200" :step="1" />
 			</drawer-detail>
+			<drawer-detail icon="settings" :title="$t('setup')">
+				<div class="type-label">{{ $t('layouts.cards.image_source') }}</div>
+				<v-select
+					v-model="imageSource"
+					full-width
+					item-value="field"
+					item-text="name"
+					:items="fileFields"
+				/>
+			</drawer-detail>
 		</portal>
 
 		<div class="grid">
 			<card
 				v-for="item in items"
 				:key="item[primaryKeyField.field]"
-				:size="size"
+				:crop="crop"
 				:icon="icon"
-			/>
+				:file="imageSource ? item[imageSource] : null"
+			>
+				<template #title>{{ title }}</template>
+				<template #subtitle>{{ subtitle }}</template>
+			</card>
 		</div>
 	</div>
 </template>
@@ -31,6 +45,10 @@ type Item = Record<string, any>;
 type ViewOptions = {
 	size?: number;
 	icon?: string;
+	crop?: boolean;
+	imageSource?: string;
+	title?: string;
+	subtitle?: string;
 };
 
 type ViewQuery = {
@@ -70,6 +88,10 @@ export default defineComponent({
 			type: String,
 			default: `/{{project}}/collections/{{collection}}/{{primaryKey}}`,
 		},
+		file: {
+			type: Object as PropType<File>,
+			default: null,
+		},
 	},
 	setup(props, { emit }) {
 		const mainElement = inject('main-element', ref<Element>(null));
@@ -86,6 +108,10 @@ export default defineComponent({
 			fieldsInCollection.value.filter(({ hidden_browse }) => hidden_browse === false)
 		);
 
+		const fileFields = computed(() => {
+			return availableFields.value.filter((field) => field.type === 'file');
+		});
+
 		const { sort, limit, page } = useItemOptions();
 
 		const { items, loading, error, totalPages, itemCount } = useItems(collection, {
@@ -96,33 +122,7 @@ export default defineComponent({
 			filters: _filters,
 		});
 
-		const size = computed({
-			get() {
-				return _viewOptions.value?.size || 120;
-			},
-			set(newSize: number) {
-				_viewOptions.value = {
-					..._viewOptions.value,
-					size: newSize,
-				};
-			},
-		});
-
-		const icon = computed({
-			get() {
-				return _viewOptions.value?.icon || 'box';
-			},
-			set(newIcon: string) {
-				_viewOptions.value = {
-					..._viewOptions.value,
-					icon: newIcon,
-				};
-			},
-		});
-
-		const cards = computed(() => items.value.map((item: Item) => {
-
-		}));
+		const { crop, size, icon, imageSource, title, subtitle } = useViewOptions();
 
 		return {
 			_selection,
@@ -138,6 +138,11 @@ export default defineComponent({
 			size,
 			primaryKeyField,
 			icon,
+			crop,
+			fileFields,
+			imageSource,
+			title,
+			subtitle,
 		};
 
 		function toPage(newPage: number) {
@@ -148,37 +153,56 @@ export default defineComponent({
 			});
 		}
 
+		function useViewOptions() {
+			const size = createViewOption('size', 120);
+			const crop = createViewOption('crop', true);
+			const icon = createViewOption('icon', 'box');
+			const title = createViewOption('title', null);
+			const subtitle = createViewOption('subtitle', null);
+			const imageSource = createViewOption('imageSource', fileFields.value[0]?.field || null);
+
+			return { size, crop, icon, imageSource, title, subtitle };
+
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			function createViewOption<T>(key: keyof ViewOptions, defaultValue: any) {
+				return computed<T>({
+					get() {
+						return _viewOptions.value?.[key] || defaultValue;
+					},
+					set(newValue: T) {
+						_viewOptions.value = {
+							..._viewOptions.value,
+							[key]: newValue,
+						};
+					},
+				});
+			}
+		}
+
 		function useItemOptions() {
 			const page = ref(1);
 
-			const sort = computed({
-				get() {
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					return _viewQuery.value?.sort || primaryKeyField.value!.field;
-				},
-				set(newSort: string) {
-					page.value = 1;
-					_viewQuery.value = {
-						..._viewQuery.value,
-						sort: newSort,
-					};
-				},
-			});
-
-			const limit = computed({
-				get() {
-					return _viewQuery.value?.limit || 25;
-				},
-				set(newLimit: number) {
-					page.value = 1;
-					_viewQuery.value = {
-						..._viewQuery.value,
-						limit: newLimit,
-					};
-				},
-			});
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const sort = createItemOption<string>('sort', primaryKeyField.value!.field);
+			const limit = createItemOption<number>('limit', 25);
 
 			return { sort, limit, page };
+
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			function createItemOption<T>(key: keyof ViewQuery, defaultValue: any) {
+				return computed<T>({
+					get() {
+						return _viewQuery.value?.[key] || defaultValue;
+					},
+					set(newValue: T) {
+						page.value = 1;
+						_viewQuery.value = {
+							..._viewQuery.value,
+							[key]: newValue,
+						};
+					},
+				});
+			}
 		}
 	},
 });

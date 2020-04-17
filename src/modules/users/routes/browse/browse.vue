@@ -59,7 +59,7 @@
 			:is="`layout-${viewType}`"
 			collection="directus_users"
 			:selection.sync="selection"
-			:view-options.sync="viewOptions"
+			:view-options.sync="viewOptionsWithDefaults"
 			:view-query.sync="viewQuery"
 			:detail-route="'/{{project}}/users/{{item.role}}/{{primaryKey}}'"
 			:filters="_filters"
@@ -133,6 +133,24 @@ export default defineComponent({
 			];
 		});
 
+		const viewOptionsWithDefaults = computed({
+			get() {
+				if (!viewOptions.value) {
+					if (viewType.value === 'cards') {
+						return {
+							icon: 'person',
+							title: '{{first_name}} {{last_name}}',
+							subtitle: '{{ title }}',
+						};
+					}
+				}
+				return viewOptions.value;
+			},
+			set(newOptions: any) {
+				viewOptions.value = newOptions;
+			},
+		});
+
 		return {
 			_filters,
 			addNewLink,
@@ -147,6 +165,7 @@ export default defineComponent({
 			viewOptions,
 			viewQuery,
 			viewType,
+			viewOptionsWithDefaults,
 		};
 
 		function useBatchDelete() {
