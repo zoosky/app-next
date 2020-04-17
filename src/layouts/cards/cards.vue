@@ -31,6 +31,10 @@
 					<render-template :collection="collection" :item="item" :template="subtitle" />
 				</template>
 			</card>
+
+			<template v-if="loading">
+				<card v-for="n in 15" :key="`loader-${n}`" loading />
+			</template>
 		</div>
 	</div>
 </template>

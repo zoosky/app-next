@@ -1,14 +1,20 @@
 <template>
-	<div class="card">
+	<div class="card" :class="{ loading }">
 		<div class="header">
-			<p v-if="type" class="type type-title">{{ type }}</p>
+			<v-skeleton-loader v-if="loading" />
 			<template v-else>
-				<img v-if="imageSource" :src="imageSource" />
-				<v-icon v-else large :name="icon" />
+				<p v-if="type" class="type type-title">{{ type }}</p>
+				<template v-else>
+					<img v-if="imageSource" :src="imageSource" />
+					<v-icon v-else large :name="icon" />
+				</template>
 			</template>
 		</div>
-		<div class="title" v-if="$slots.title"><slot name="title" /></div>
-		<div class="subtitle" v-if="$slots.subtitle"><slot name="subtitle" /></div>
+		<v-skeleton-loader v-if="loading" type="text" />
+		<template v-else>
+			<div class="title" v-if="$slots.title"><slot name="title" /></div>
+			<div class="subtitle" v-if="$slots.subtitle"><slot name="subtitle" /></div>
+		</template>
 	</div>
 </template>
 
@@ -38,6 +44,10 @@ export default defineComponent({
 			default: null,
 		},
 		crop: {
+			type: Boolean,
+			default: false,
+		},
+		loading: {
 			type: Boolean,
 			default: false,
 		},
@@ -99,6 +109,20 @@ export default defineComponent({
 
 	.v-icon {
 		--v-icon-color: var(--foreground-subdued);
+	}
+
+	::v-deep .v-skeleton-loader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.loading {
+	.header {
+		margin-bottom: 8px;
 	}
 }
 

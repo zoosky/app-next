@@ -78,6 +78,14 @@ export default defineComponent({
 	height: var(--input-height-tall);
 }
 
+.text {
+	flex-grow: 1;
+	height: 12px;
+	border-radius: 6px;
+
+	@include loader;
+}
+
 .list-item-icon {
 	display: flex;
 	align-items: center;
