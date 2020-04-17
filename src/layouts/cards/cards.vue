@@ -4,6 +4,14 @@
 			<drawer-detail icon="crop_square" :title="$t('layouts.cards.size')">
 				<v-slider v-model="size" :min="100" :max="200" :step="1" />
 			</drawer-detail>
+			<drawer-detail icon="format_list_numbered" :title="$t('per_page')">
+				<v-select
+					full-width
+					@input="limit = +$event"
+					:value="`${limit}`"
+					:items="['10', '25', '50', '100', '250']"
+				/>
+			</drawer-detail>
 			<drawer-detail icon="settings" :title="$t('setup')">
 				<div class="setting">
 					<div class="label type-text">{{ $t('layouts.cards.image_source') }}</div>
@@ -57,7 +65,7 @@
 
 		<div class="grid">
 			<template v-if="loading">
-				<card v-for="n in 14" :key="`loader-${n}`" loading />
+				<card v-for="n in limit" :key="`loader-${n}`" loading />
 			</template>
 
 			<card

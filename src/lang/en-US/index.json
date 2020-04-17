@@ -228,6 +228,7 @@
 	"none": "None",
 
 	"n_items_selected": "No Items Selected | 1 Item Selected | {n} Items Selected",
+	"per_page": "Per Page",
 
   "about_directus": "About Directus",
   "activity_log": "Activity Log",
