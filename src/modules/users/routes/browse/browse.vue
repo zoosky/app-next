@@ -7,7 +7,7 @@
 		</template>
 
 		<template #drawer>
-			<layout-drawer-detail v-model="viewType" />
+			<layout-drawer-detail v-model="viewTypeWithDefault" />
 			<filter-drawer-detail v-model="filters" collection="directus_users" />
 			<portal-target name="drawer" />
 		</template>
@@ -56,7 +56,7 @@
 		<component
 			class="layout"
 			ref="layout"
-			:is="`layout-${viewType}`"
+			:is="`layout-${viewTypeWithDefault}`"
 			collection="directus_users"
 			:selection.sync="selection"
 			:view-options.sync="viewOptionsWithDefaults"
@@ -133,10 +133,20 @@ export default defineComponent({
 			];
 		});
 
+		const viewTypeWithDefault = computed({
+			get() {
+				if (!viewType.value) return 'cards';
+				return viewType.value;
+			},
+			set(newViewType: string) {
+				viewType.value = newViewType;
+			},
+		});
+
 		const viewOptionsWithDefaults = computed({
 			get() {
 				if (!viewOptions.value) {
-					if (viewType.value === 'cards') {
+					if (viewTypeWithDefault.value === 'cards') {
 						return {
 							icon: 'person',
 							title: '{{first_name}} {{last_name}}',
@@ -166,6 +176,7 @@ export default defineComponent({
 			viewQuery,
 			viewType,
 			viewOptionsWithDefaults,
+			viewTypeWithDefault,
 		};
 
 		function useBatchDelete() {

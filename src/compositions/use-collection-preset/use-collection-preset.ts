@@ -18,7 +18,7 @@ export function useCollectionPreset(collection: Ref<string>) {
 		};
 	});
 
-	const viewOptions = computed({
+	const viewOptions = computed<Record<string, any>>({
 		get() {
 			return localPreset.value.view_options?.[localPreset.value.view_type] || null;
 		},
@@ -34,7 +34,7 @@ export function useCollectionPreset(collection: Ref<string>) {
 		},
 	});
 
-	const viewQuery = computed({
+	const viewQuery = computed<Record<string, any>>({
 		get() {
 			return localPreset.value.view_query?.[localPreset.value.view_type] || null;
 		},
@@ -50,9 +50,9 @@ export function useCollectionPreset(collection: Ref<string>) {
 		},
 	});
 
-	const viewType = computed({
+	const viewType = computed<string>({
 		get() {
-			return localPreset.value.view_type || 'tabular';
+			return localPreset.value.view_type || null;
 		},
 		set(val) {
 			localPreset.value = {
