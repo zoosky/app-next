@@ -21,6 +21,7 @@
 					<div class="label type-text">{{ $t('layouts.cards.image_fit') }}</div>
 					<v-select
 						v-model="imageFit"
+						:disabled="imageSource === null"
 						full-width
 						:items="[
 							{
@@ -43,6 +44,11 @@
 				<div class="setting">
 					<div class="label type-text">{{ $t('layouts.cards.subtitle') }}</div>
 					<v-input full-width v-model="subtitle" />
+				</div>
+
+				<div class="setting">
+					<div class="label type-text">{{ $t('layouts.cards.fallback_icon') }}</div>
+					<v-input full-width v-model="icon" />
 				</div>
 			</drawer-detail>
 		</portal>

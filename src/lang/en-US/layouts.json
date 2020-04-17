@@ -8,7 +8,8 @@
 			"crop": "Crop",
 			"contain": "Contain",
 			"title": "Title",
-			"subtitle": "Subtitle"
+			"subtitle": "Subtitle",
+			"fallback_icon": "Fallback Icon"
 		},
 		"tabular": {
 			"tabular": "Table",
