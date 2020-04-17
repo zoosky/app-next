@@ -1,5 +1,10 @@
 <template>
-	<v-menu class="v-select" attached :close-on-content-click="multiple === false">
+	<v-menu
+		:disabled="disabled"
+		class="v-select"
+		attached
+		:close-on-content-click="multiple === false"
+	>
 		<template #activator="{ toggle }">
 			<v-input
 				:full-width="fullWidth"
@@ -8,6 +13,7 @@
 				:value="displayValue"
 				@click="toggle"
 				:placeholder="placeholder"
+				:disabled="disabled"
 			>
 				<template #append><v-icon name="expand_more" /></template>
 			</v-input>
@@ -85,6 +91,10 @@ export default defineComponent({
 			default: false,
 		},
 		allowNull: {
+			type: Boolean,
+			default: false,
+		},
+		disabled: {
 			type: Boolean,
 			default: false,
 		},
