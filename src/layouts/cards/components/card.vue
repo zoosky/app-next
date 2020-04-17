@@ -1,7 +1,7 @@
 <template>
 	<div class="card" :class="{ loading }" @click="handleClick">
 		<div class="header" :class="{ selected: value.includes(item) }">
-			<div class="selection-indicator" :class="{ 'needs-shadow': !!imageSource }">
+			<div class="selection-indicator" :class="{ 'select-mode': selectMode }">
 				<v-icon :name="selectionIcon" @click.stop="toggleSelection" />
 			</div>
 			<v-skeleton-loader v-if="loading" />
@@ -177,6 +177,13 @@ export default defineComponent({
 		z-index: 1;
 		width: 100%;
 		height: 30%;
+		opacity: 0;
+		transition: opacity var(--fast) var(--transition);
+
+		&:hover,
+		&.select-mode {
+			opacity: 1;
+		}
 
 		.v-icon {
 			--v-icon-color: var(--white);
@@ -184,7 +191,7 @@ export default defineComponent({
 			margin: 5%;
 		}
 
-		&.needs-shadow::before {
+		&::before {
 			position: absolute;
 			top: 0;
 			left: 0;

@@ -30,7 +30,7 @@
 				:icon="icon"
 				:file="imageSource ? item[imageSource] : null"
 				:item="item"
-				:select-mode="selectMode"
+				:select-mode="selectMode || _selection.length > 0"
 				:to="getLinkForItem(item)"
 				v-model="_selection"
 			>
@@ -253,8 +253,6 @@ export default defineComponent({
 
 		function getLinkForItem(item: Record<string, any>) {
 			const currentProjectKey = projectsStore.state.currentProjectKey;
-
-			console.log(item);
 
 			return render(props.detailRoute, {
 				item: item,
